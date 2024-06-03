@@ -1,1 +1,1 @@
-# Finincial-Application
+# Financial-Application
