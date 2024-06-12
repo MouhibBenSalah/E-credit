@@ -30,6 +30,8 @@ public class DemandeCredit {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Garantie> garanties;
 
+    private Integer userId;
+
 
 
 
