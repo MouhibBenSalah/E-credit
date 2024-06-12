@@ -30,4 +30,9 @@ public class UserController {
     public ResponseEntity<FullUserResponse> getAllUsersWithDemandes(@PathVariable("userId") int userId) {
         return ResponseEntity.ok(userService.findUserbyDemandeCredit(userId));
     }
+
+    @GetMapping("/with-notifications/{userId}")
+    public ResponseEntity<FullUserResponseForNotif> getAllUsersWithNotif(@PathVariable("userId") int userId) {
+        return ResponseEntity.ok(userService.findUserbyNotif(userId));
+    }
 }
