@@ -1,16 +1,15 @@
-package com.spring.user;
+package com.spring.user.DTO;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DemandeCreditDto {
+public class DemandeCreditDTO {
     private int id;
     private Date dateEntreeRelation;
     private String observation;

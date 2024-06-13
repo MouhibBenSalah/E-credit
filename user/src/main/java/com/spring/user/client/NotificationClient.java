@@ -1,15 +1,15 @@
 package com.spring.user.client;
 
-
 import com.spring.user.DTO.DemandeCreditDTO;
+import com.spring.user.DTO.NotificationDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "DemandesCredit-service", url = "${application.config.DemandesCredit-url}")
-public interface DemandeCreditClient {
+@FeignClient(name = "notification-service", url = "${application.config.notification-url}")
+public interface NotificationClient {
     @GetMapping("/user/{id}")
-    List<DemandeCreditDTO> findAllDemandesCreditByUser(@PathVariable("id") Integer id);
+    List<NotificationDTO> findAllNotificationByUser(@PathVariable("id") Integer id);
 }

@@ -1,5 +1,6 @@
 package com.spring.user;
 
+import com.spring.user.DTO.DemandeCreditDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,10 +26,7 @@ public class FullUserResponse {
         private int NumCompte;
         private Date dateOuvCompte;
         private String deviseC;
-
-        private String email;
-        private String password;
-        List<DemandeCreditDto> demandesCredit;
+        List<DemandeCreditDTO> demandesCredit;
 
 
 }
