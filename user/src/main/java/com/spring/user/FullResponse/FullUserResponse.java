@@ -1,6 +1,8 @@
-package com.spring.user;
+package com.spring.user.FullResponse;
 
 import com.spring.user.DTO.DemandeCreditDTO;
+import com.spring.user.Enum.Role;
+import com.spring.user.Enum.SituationFamiliale;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

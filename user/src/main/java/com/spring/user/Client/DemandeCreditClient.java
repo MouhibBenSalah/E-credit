@@ -1,4 +1,4 @@
-package com.spring.user.client;
+package com.spring.user.Client;
 
 
 import com.spring.user.DTO.DemandeCreditDTO;

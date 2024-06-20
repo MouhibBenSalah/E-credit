@@ -1,4 +1,4 @@
-package com.spring.user;
+package com.spring.user.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,28 +10,20 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "users")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    private long numCin;
-    private String nom;
-    private String prenom;
-    private Date dateNaiss;
-    private SituationFamiliale sf;
-    private int NumCompte;
+    private int numCompte;
     private Date dateOuvCompte;
     private String deviseC;
 
-    private String email;
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

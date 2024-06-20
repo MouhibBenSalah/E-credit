@@ -1,4 +1,4 @@
-package com.spring.user;
+package com.spring.user.Enum;
 
 public enum SituationFamiliale {
     Celibataire,

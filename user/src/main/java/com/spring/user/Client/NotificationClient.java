@@ -1,6 +1,5 @@
-package com.spring.user.client;
+package com.spring.user.Client;
 
-import com.spring.user.DTO.DemandeCreditDTO;
 import com.spring.user.DTO.NotificationDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

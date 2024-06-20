@@ -1,6 +1,8 @@
-package com.spring.user;
+package com.spring.user.FullResponse;
 
 import com.spring.user.DTO.NotificationDTO;
+import com.spring.user.Enum.Role;
+import com.spring.user.Enum.SituationFamiliale;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
