@@ -1,5 +1,7 @@
 package com.spring.DemandeCredit.Entities;
 
+import com.spring.DemandeCredit.Enum.TypeCredit;
+import com.spring.DemandeCredit.Enum.TypeUnite;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +21,15 @@ public class DemandeCredit {
 
     private Date dateEntreeRelation;
     private String observation;
+
+    @Enumerated(EnumType.STRING)
+    private TypeCredit typeCredit;
+
+    @Enumerated(EnumType.STRING)
+    private TypeUnite unite;
+    private float montant;
+    private Integer nbrEcheances;
+    private Float interet;
 
     @OneToMany(mappedBy = "demandeCredit", cascade = CascadeType.ALL)
     private Set<PieceJointe> pieceJointes;

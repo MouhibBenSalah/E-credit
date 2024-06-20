@@ -1,5 +1,9 @@
-package com.spring.user;
+package com.spring.user.Controller;
 
+import com.spring.user.Entity.User;
+import com.spring.user.FullResponse.FullUserResponse;
+import com.spring.user.FullResponse.FullUserResponseForNotif;
+import com.spring.user.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,12 @@ public class UserController {
     private List<User> getUser() {
         return userService.getAllUsers();
     }
+
+    @GetMapping("/{cin}")
+    public ResponseEntity<User> getUserByCin(@PathVariable long cin) {
+        return ResponseEntity.ok(userService.getUserByCin(cin));
+    }
+
     @PostMapping
     public User createUser(@RequestBody User u) {
         return userService.createUser(u);

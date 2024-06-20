@@ -1,10 +1,13 @@
-package com.spring.user;
+package com.spring.user.Service;
 
 
-import com.spring.user.client.DemandeCreditClient;
-import com.spring.user.client.NotificationClient;
+import com.spring.user.Entity.User;
+import com.spring.user.FullResponse.FullUserResponse;
+import com.spring.user.FullResponse.FullUserResponseForNotif;
+import com.spring.user.Repository.UserRepository;
+import com.spring.user.Client.DemandeCreditClient;
+import com.spring.user.Client.NotificationClient;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
 
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
     private DemandeCreditClient demandeCreditclient;
     private NotificationClient notificationClient;
 
@@ -23,6 +26,11 @@ public class UserService {
 
     public User createUser(User user){
         return userRepository.save(user);
+    }
+
+    public User getUserByCin(long cin) {
+        return userRepository.findByNumCin(cin)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public FullUserResponse findUserbyDemandeCredit(Integer id) {
