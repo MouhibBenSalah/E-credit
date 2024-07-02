@@ -1,0 +1,120 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+.navbar {
+   
+    position: sticky;
+    top: 0;
+    height: 85px;
+   
+}
+
+img{
+    width: 150px;
+    height: 70px;
+    position: relative;
+    right: 50px;
+    
+}
+
+.container {
+    
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    width: 100%;
+}
+
+
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    
+}
+.credit a {
+    border: 2px solid #ff3e00; /* Adding border */
+
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: transparent; /* No background */
+}
+
+
+.nav-links li {
+    margin: 0 10px;
+    
+}
+
+.nav-links li a {
+    color: #0f0f0f;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.nav-links li a:hover {
+    color: #003f0c;
+}
+.btn {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    
+    transition: 0.5s;
+  }
+  
+  .btn.btn-primary {
+   align-items: center;
+   
+    border: none;
+   
+    border-radius:20px;
+   
+    background-color: #f27228;
+
+  }
+  .btn.btn-primary:hover {
+   background-color: #df6219 ;
+   transition:  0.4s ease;
+   color: #fafafa !important;
+ 
+   }
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 50%;
+        background-color: white;
+        position: absolute;
+        top: 85px;
+        right: 0;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .navbar-toggler {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #00283f;
+    }
+}
+
+@media (min-width: 769px) {
+    .navbar-toggler {
+        display: none;
+    }
+}
+
