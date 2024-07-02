@@ -1,0 +1,122 @@
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f27228;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    border-color: #f27228;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e66010;
+    border-color: #e66010;
+}
+
+/* Container for the carousel item */
+.my {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    overflow: hidden;
+    bottom: 40px;
+}
+
+
+/* Flexbox container for the row */
+.d_flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container for the image */
+.con_img {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Image responsiveness and styling */
+.con_img img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+
+}
+
+/* Content container with text */
+.bluid {
+    text-align: left;
+    padding: 20px;
+}
+
+/* Styling for the heading */
+.bluid h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styling for the paragraph text */
+.bluid p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .my {
+        height: auto;
+        padding: 40px 0;
+        
+
+    }
+
+  
+
+    .con_img {
+        margin-bottom: 20px;
+    }
+
+    .bluid {
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .bluid h1 {
+        font-size: 2rem;
+    }
+
+    .bluid p {
+        font-size: 0.875rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+    }
+}
+
+/* Additional styling for larger screens */
+@media (min-width: 769px) {
+    .my {
+        padding: 0 40px;
+    }
+
+    .bluid {
+        padding: 0 40px;
+    }
+}
