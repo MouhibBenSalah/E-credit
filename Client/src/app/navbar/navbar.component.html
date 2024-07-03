@@ -9,9 +9,23 @@
             <li class="credit"><a href="#">Simuler un Credit</a></li>
             <li><a href="#">A propos</a></li>
             <li><a href="#">Contact</a></li>
-            <li>
-                <a routerLink="/login" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
-            </li>
+            <li *ngIf="!auth.isLoggedIn()">
+                <a routerLink="/login" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">
+                  Join Now<i class="fa fa-arrow-right ms-3"></i>
+                </a>
+              </li>
+              <li *ngIf="auth.isLoggedIn()">
+                <div class="nav-item dropdown">
+                  <div class="picon profile">
+                    <img src="../../assets/images/fcbk.png" alt="user-img">
+                  </div>
+                  <div class="dropdown-menu fade-down m-0">
+                    <a routerLink="/myprofile" class="dropdown-item" routerLinkActive="active">Mon Profil</a>
+                    <a routerLink="/" class="dropdown-item" routerLinkActive="active">Mes Demandes Credit</a>
+                    <a class="dropdown-item" (click)="logout()">Deconnecter</a>
+                  </div>
+                </div>
+              </li>
         </ul>
         
     </div>

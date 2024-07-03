@@ -117,4 +117,44 @@ img{
         display: none;
     }
 }
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+      display: block;
+      margin-top: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.5s;
+      right: 0;
+    }
+  
+    .navbar .dropdown-menu.fade-down {
+      top: 100%;
+      transform: rotateX(-75deg);
+      transform-origin: 0% 0%;
+    }
+  
+    .navbar .nav-item:hover .dropdown-menu {
+      top: 100%;
+      transform: rotateX(10deg);
+      visibility: visible;
+      transition: 0.5s;
+      opacity: 1;
+    }
+  }
+  .dropdown-item {
+    background-color: #ffffff;
+    color: #181d38;
+    cursor: pointer;
+  }
+  .dropdown-item:hover {
+    background-color: rgb(231, 229, 229);
+  }
 
+.profile {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+  }
