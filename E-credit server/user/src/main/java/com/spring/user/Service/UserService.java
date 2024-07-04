@@ -20,6 +20,7 @@ public class UserService {
     private DemandeCreditClient demandeCreditclient;
     private NotificationClient notificationClient;
 
+
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }

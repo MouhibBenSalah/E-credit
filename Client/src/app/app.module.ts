@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { SimulateurComponent } from './simulateur/simulateur.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     FirstComponent,
     EtapesComponent,
     LoginComponent,
-    SimulateurComponent
+    SimulateurComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

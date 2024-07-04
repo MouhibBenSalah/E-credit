@@ -3,6 +3,7 @@ package com.spring.user.Controller;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
 import com.spring.user.FullResponse.FullUserResponseForNotif;
+import com.spring.user.Repository.UserRepository;
 import com.spring.user.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/User")
 public class UserController {
+    @Autowired
+    private UserRepository userRepository;
 
     private final UserService userService;
-
+  
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
