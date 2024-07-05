@@ -4,6 +4,7 @@ import { FirstInterfaceComponent } from './first-interface/first-interface.compo
 import { LoginComponent } from './login/login.component';
 import { SimulateurComponent } from './simulateur/simulateur.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'ForgetPass',
     component: ForgetPasswordComponent,
     title: 'entrez mail'
+  },
+  {
+    path: 'resetPass',
+    component: ResetPasswordComponent,
+    title: 'reset Your Password'
   }
 ];
 

@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   public isLoginFormActive: boolean = true;
+  
  
 
   toggleForm() {
@@ -22,24 +23,40 @@ export class LoginComponent {
 
     constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) {
       this.loginForm = this.fb.group({
-        email: [''],
+        email: ['', [Validators.required, Validators.email]],
         password: ['']
       });
   
       this.signupForm = this.fb.group({
-        nom: [''],
-        prenom: [''],
-        numCin: [''],
-        email: [''],
-        password: [''],
-        dateNaiss: [''],
+        nom: ['', Validators.required],
+        prenom: ['', Validators.required],
+        numCin: ['', [Validators.required, this.cinValidator]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        dateNaiss: ['', [Validators.required, this.ageValidator(18)]],
         role: ['Client']
       });
     }
 
-   onSubmit() {
-    // Handle form submission
-  }
+    private cinValidator(control: AbstractControl): { [key: string]: any } | null {
+      const valid = /^\d{8}$/.test(control.value);
+      return valid ? null : { invalidCin: true };
+    }
+  
+    // Custom validator for age
+    private ageValidator(minAge: number) {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const birthDate = new Date(control.value);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age >= minAge ? null : { underAge: true };
+      };
+    }
+  
   signupSubmit() {
     const nomControl = this.signupForm.get('nom');
     const prenomControl = this.signupForm.get('prenom');
