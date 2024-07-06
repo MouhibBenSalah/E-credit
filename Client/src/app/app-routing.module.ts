@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FirstInterfaceComponent } from './first-interface/first-interface.component';
 import { LoginComponent } from './login/login.component';
-import { SimulateurComponent } from './simulateur/simulateur.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
@@ -23,9 +22,9 @@ const routes: Routes = [
     title: 'entrez mail'
   },
   {
-    path: 'resetPass',
+    path: 'reset-password/:token',
     component: ResetPasswordComponent,
-    title: 'reset Your Password'
+    title: 'Reset Your Password' 
   }
 ];
 

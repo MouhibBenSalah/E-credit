@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -37,7 +37,12 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
-  sendResetPasswordEmail(email: string) {
-    return this.http.post<any>(`${this.apiURL}forgot-password`, { email });
+   sendResetPasswordEmail(email: string): Observable<any> {
+    const params = new HttpParams().set('email', email);
+    return this.http.post(`${this.apiURL}forgot-password`, {}, { params });
   }
+  resetPassword(token: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiURL}reset-password`, { token, password });
+  }
+  
 }
