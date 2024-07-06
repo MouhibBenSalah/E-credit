@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,7 +23,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.login(request));
     }
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestParam("email") String email) {
+    public ResponseEntity<Object> forgotPassword(@RequestParam("email") String email) {
         Optional<User> optionalUser = authenticationService.findUserByEmail(email);
         if (!optionalUser.isPresent()) {
             return ResponseEntity.badRequest().body("User not found");
@@ -35,21 +33,23 @@ public class AuthenticationController {
         String token = UUID.randomUUID().toString();
         authenticationService.createPasswordResetTokenForUser(user, token);
 
-        String resetUrl = "http://localhost:4020/auth/reset-password?token=" + token;
+        String resetUrl = "http://localhost:4200/reset-password/" + token;
         authenticationService.sendEmail(user.getEmail(), "Reset Password", "To reset your password, click the link below:\n" + resetUrl);
 
-        return ResponseEntity.ok("Email sent");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> payload) {
         String token = payload.get("token");
         String password = payload.get("password");
         try {
             authenticationService.resetPassword(token, password);
-            return ResponseEntity.ok("Password reset successfully");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Password reset successfully");
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
         }
     }
 }
