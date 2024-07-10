@@ -25,7 +25,7 @@ public class DemandeCreditController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<DemandeCredit>> findAllDemandesCredit(@PathVariable("id") Integer userId) {
+    public ResponseEntity<List<DemandeCredit>> findAllDemandesCredit(@PathVariable("id") Long userId) {
         return ResponseEntity.ok(demandeCreditService.findAllDemandeCreditByUser(userId));
     }
 }

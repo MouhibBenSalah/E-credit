@@ -15,13 +15,13 @@ import java.util.Date;
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     private String title;
     private String message;
     private Date dateEnvoi;
     @Enumerated(EnumType.STRING)
     private TypeN type;
 
-    private int userId;
+    private Long userId;
 
 }

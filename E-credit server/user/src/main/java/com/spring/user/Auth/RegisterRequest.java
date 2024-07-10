@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class RegisterRequest {
-    private long numCin;
+    private Long numCin;
     private String nom;
     private String prenom;
     private Date dateNaiss;

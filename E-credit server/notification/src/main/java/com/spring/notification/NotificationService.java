@@ -17,10 +17,10 @@ public class NotificationService {
     public Notification createNotif(Notification notif){
         return notifRepository.save(notif);
     }
-    public Notification getNotifById(int Id) {
+    public Notification getNotifById(Long Id) {
         return notifRepository.findById(Id).orElse(null);
     }
-    public String deleteNotif(int id) {
+    public String deleteNotif(Long id) {
         boolean exists = notifRepository.existsById(id);
         if (!exists)
             throw new IllegalStateException("Notification with id " + id + " does not exist");
@@ -30,7 +30,7 @@ public class NotificationService {
 
 
 
-    public List<Notification> findAllNotifByUser(Integer userId) {
+    public List<Notification> findAllNotifByUser(Long userId) {
         return notifRepository.findAllByUserId(userId);
     }
 

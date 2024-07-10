@@ -19,7 +19,7 @@ public class NotificationController {
     }
 
     @GetMapping(path = "/{id}")
-    public Notification getNotifById(@PathVariable("id") int id) {
+    public Notification getNotifById(@PathVariable("id") Long id) {
         return service.getNotifById(id);
     }
 
@@ -29,11 +29,11 @@ public class NotificationController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public String deleteNotif(@PathVariable("id") int id) {
+    public String deleteNotif(@PathVariable("id") Long id) {
         return service.deleteNotif(id);
     }
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<Notification>> findAllNotif(@PathVariable("id") Integer userId) {
+    public ResponseEntity<List<Notification>> findAllNotif(@PathVariable("id") Long userId) {
         return ResponseEntity.ok(service.findAllNotifByUser(userId));
     }
 }

@@ -4,6 +4,8 @@ import { FirstInterfaceComponent } from './first-interface/first-interface.compo
 import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,16 @@ const routes: Routes = [
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     title: 'Reset Your Password' 
+  }, 
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'myProfile'
+  }, 
+  {
+    path :'demandeCredit',
+    component: DemandeCreditComponent,
+    title:'Mes Demandes Credit'
   }
 ];
 

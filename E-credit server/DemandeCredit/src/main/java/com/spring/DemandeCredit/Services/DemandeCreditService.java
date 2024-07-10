@@ -23,7 +23,7 @@ public class DemandeCreditService {
         return demandeCreditRepository.save(demandeCredit);
     }
 
-    public List<DemandeCredit> findAllDemandeCreditByUser(Integer userId) {
+    public List<DemandeCredit> findAllDemandeCreditByUser(Long userId) {
         return demandeCreditRepository.findAllByUserId(userId);
     }
 }

@@ -27,17 +27,11 @@
     height: 100vh;
     background-color: #f8f9fa;
     overflow: hidden;
+    flex-wrap: wrap;
     bottom: 40px;
 }
 
 
-/* Flexbox container for the row */
-.d_flex {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
 
 /* Container for the image */
 .con_img {
