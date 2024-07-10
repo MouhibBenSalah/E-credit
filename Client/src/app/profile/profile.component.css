@@ -1,0 +1,56 @@
+
+@media (max-width: 768px) {
+    .profile-info {
+        margin-left: 0;
+    }
+}
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin-left: 230px;
+}
+
+
+.profile-info{
+    width: 100%;
+    max-width: 650px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #ffffff; /* Light background */
+    box-shadow: 0 0 15px rgba(255, 62, 0, 0.3), 0 0 30px rgba(0, 40, 63, 0.3); /* Mixed shadow colors */
+}
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.profile-section h2 {
+    font-size: 1.2rem;
+    border-bottom: 1px solid #bdc3c7; /* Lighter border */
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-item label {
+    font-weight: bold;
+    display: inline-block;
+    width: 160px;
+    white-space: nowrap;
+}
+
+.info-item input, .info-item select {
+    width: calc(100% - 160px); /* Adjust input width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.info-item input[type="date"] {
+    width: auto; /* Auto width for date input */
+}
