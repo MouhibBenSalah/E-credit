@@ -1,6 +1,8 @@
 package com.spring.user.Entity;
 
+import com.spring.user.Enum.LIEU_NAISSANCE;
 import com.spring.user.Enum.Role;
+import com.spring.user.Enum.SEXE;
 import com.spring.user.Enum.SituationFamiliale;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,12 +27,13 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private long numCin;
+    @Column(unique = true, nullable = false)
+    private Long numCin;
 
     @Column(nullable = false)
     private String nom;
@@ -39,8 +42,14 @@ public class User implements UserDetails {
     private String prenom;
 
     private Date dateNaiss;
+    @Enumerated(EnumType.STRING)
+    private LIEU_NAISSANCE lieuNaiss;
+
+    @Enumerated(EnumType.STRING)
+    private SEXE sexe;
 
     private SituationFamiliale sf;
+    private String profilePicture = "../../assets/images/man3.jpg";
 
     @Column(nullable = false, unique = true)
     private String email;

@@ -18,7 +18,7 @@ import java.util.Set;
 public class DossierCredit {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private int id;
+  private Long id;
 
   private Date dateCréation;
   private Date dateMiseAJour;

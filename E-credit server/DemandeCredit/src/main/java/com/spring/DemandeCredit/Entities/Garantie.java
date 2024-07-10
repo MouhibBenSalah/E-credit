@@ -17,7 +17,7 @@ import java.util.Set;
 public class Garantie {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     private String nature;
 
     @Enumerated(EnumType.STRING)

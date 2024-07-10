@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,12 +30,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserByCin(long cin) {
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    public User getUserByCin(Long cin) {
         return userRepository.findByNumCin(cin)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public FullUserResponse findUserbyDemandeCredit(Integer id) {
+    public FullUserResponse findUserbyDemandeCredit(Long id) {
         var user = userRepository.findById(id).orElse(
                 User.builder().nom("not found").prenom("not found").build()
         );
@@ -45,7 +50,7 @@ public class UserService {
                 .build();
     }
 
-    public FullUserResponseForNotif findUserbyNotif(Integer id) {
+    public FullUserResponseForNotif findUserbyNotif(Long id) {
         var user = userRepository.findById(id).orElse(
                 User.builder().nom("not found").prenom("not found").build()
         );
@@ -55,4 +60,21 @@ public class UserService {
                 .notifications(notifications)
                 .build();
     }
+    public Optional<User> updateUser(Long userId, User user) {
+        Optional<User> existingUserOptional = userRepository.findById(userId);
+        if (existingUserOptional.isPresent()) {
+            User existingUser = existingUserOptional.get();
+            existingUser.setNom(user.getNom());
+            existingUser.setPrenom(user.getPrenom());
+            existingUser.setDateNaiss(user.getDateNaiss());
+            existingUser.setLieuNaiss(user.getLieuNaiss());
+            existingUser.setSexe(user.getSexe());
+            existingUser.setSf(user.getSf());
+            existingUser.setEmail(user.getEmail());
+            userRepository.save(existingUser);
+            return Optional.of(existingUser);
+        }
+        return Optional.empty();
+    }
+
 }

@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LoginComponent,
     SimulateurComponent,
     ForgetPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ProfileComponent,
+    SidebarComponent,
+    DemandeCreditComponent
   ],
   imports: [
     BrowserModule,

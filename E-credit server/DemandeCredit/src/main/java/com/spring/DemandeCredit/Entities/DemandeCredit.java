@@ -17,7 +17,7 @@ import java.util.Set;
 public class DemandeCredit {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
 
     private Date dateEntreeRelation;
     private String observation;
@@ -41,7 +41,7 @@ public class DemandeCredit {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Garantie> garanties;
 
-    private Integer userId;
+    private Long userId;
 
 
 

@@ -8,10 +8,10 @@ import lombok.Data;
 public class PieceJointe {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     private boolean obligatoire;
     private boolean statut;
-    private long taille;
+    private Long taille;
     @Lob
     private byte[] data;
 

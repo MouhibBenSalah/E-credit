@@ -11,5 +11,5 @@ import java.util.List;
 @FeignClient(name = "DemandesCredit-service", url = "${application.config.DemandesCredit-url}")
 public interface DemandeCreditClient {
     @GetMapping("/user/{id}")
-    List<DemandeCreditDTO> findAllDemandesCreditByUser(@PathVariable("id") Integer id);
+    List<DemandeCreditDTO> findAllDemandesCreditByUser(@PathVariable("id") Long id);
 }

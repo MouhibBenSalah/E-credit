@@ -1,7 +1,10 @@
-/*package com.spring.DemandeCredit.Security;
+package com.spring.DemandeCredit.Security;
 
+/*
 
+import jakarta.ws.rs.HttpMethod;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,12 +18,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 @EnableMethodSecurity(securedEnabled = true)
+
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+    private  JwtAuthFilter jwtAuthFilter;
+
+    private  AuthenticationProvider authenticationProvider;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,8 +33,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers("/auth/**").permitAll() // Allow access without authentication
                                 .requestMatchers("/DemandesCredit/**").authenticated()
-                                .anyRequest().permitAll()
+
                 )
                 .sessionManagement(sessionManagement ->
                         sessionManagement
