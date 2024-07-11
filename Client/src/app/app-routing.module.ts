@@ -6,6 +6,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
+import { authGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -31,11 +32,13 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate:[authGuard],
     title: 'myProfile'
   }, 
   {
     path :'demandeCredit',
     component: DemandeCreditComponent,
+    canActivate:[authGuard],
     title:'Mes Demandes Credit'
   }
 ];
