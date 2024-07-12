@@ -16,7 +16,7 @@ import java.util.Date;
 public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
 
     private int numCompte;
     private Date dateOuvCompte;

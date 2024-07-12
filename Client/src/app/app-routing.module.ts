@@ -6,7 +6,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
-import { authGuard } from './services/auth.guard';
+import { authGuard, LoggedGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +17,7 @@ const routes: Routes = [
    {
     path: 'login',
     component: LoginComponent,
+    canActivate:[LoggedGuard],
     title: 'Inscrivez Vous',
   },
   {

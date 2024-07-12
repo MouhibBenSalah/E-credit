@@ -2,6 +2,7 @@ package com.spring.user.Service;
 
 
 import com.google.common.base.Function;
+import com.spring.user.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,15 +34,22 @@ public class JwtService {
 
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return  generationToken(new HashMap<>(),userDetails);
+    public String generateToken(User user, String username) {
+        Map<String, Object> claims = new HashMap<>();
+
+        claims.put("id", user.getId());
+        claims.put("userName", username);
+        claims.put("ProfilePicture", user.getProfilePicture());
+        claims.put("role", user.getRole());
+        claims.put("nom", user.getNom() + " " + user.getPrenom());
+        return  generationToken(claims,username);
     }
 
-    public String generationToken(Map<String, Object> extraClaims , UserDetails userDetails) {
+    public String generationToken(Map<String, Object> extraClaims ,String username) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *60* 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
