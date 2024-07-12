@@ -1,5 +1,6 @@
 package com.spring.user.Controller;
 
+import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
 import com.spring.user.FullResponse.FullUserResponseForNotif;
@@ -52,14 +53,15 @@ public class UserController {
         return userService.createUser(u);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    @PostMapping("/compte")
+    public Compte createCompte(@RequestBody Compte c) {
+        return userService.createCompte(c);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateUserPartial(@PathVariable Long id, @RequestBody User user) {
         Optional<User> updatedUser = userService.updateUser(id, user);
-        if (updatedUser.isPresent()) {
-            return ResponseEntity.ok(updatedUser.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return updatedUser.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/with-demandesCredit/{userId}")

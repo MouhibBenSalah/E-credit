@@ -1,65 +1,66 @@
 <app-sidebar></app-sidebar> 
 <div class="main">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="profile-info">
-        <div class="profile-section">
-            <h2>Informations Personnelles</h2>
-            <div class="info-item">
-                <label for="cin">Numéro CIN :</label>
-                <input type="text" id="cin" [(ngModel)]="profile.cin">
-            </div>
-            <div class="info-item">
-                <label for="email">Email :</label>
-                <input type="email" id="email" [(ngModel)]="profile.email">
-            </div>
-            <div class="info-item">
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" [(ngModel)]="profile.prenom">
-            </div>
-            <div class="info-item">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" [(ngModel)]="profile.nom">
-            </div>
-            <div class="info-item">
-                <label for="dateNaissance">Date de Naissance :</label>
-                <input type="date" id="dateNaissance" [(ngModel)]="profile.dateNaissance">
-            </div>
-            <div class="info-item">
-                <label for="lieuNaissance">Lieu de Naissance :</label>
-                <select id="lieuNaissance" [(ngModel)]="profile.lieuNaissance">
-                    <option *ngFor="let governorate of governorates" [value]="governorate">{{ governorate }}</option>
-                </select>
-            </div>
-            <div class="info-item">
-                <label for="sexe">Sexe :</label>
-                <select id="sexe" [(ngModel)]="profile.sexe">
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                </select>
-            </div>
-            <div class="info-item">
-                <label for="situationFamiliale">Situation Familiale :</label>
-                <select id="situationFamiliale" [(ngModel)]="profile.situationFamiliale">
-                    <option value="celibataire">Célibataire</option>
-                    <option value="marie">Marié(e)</option>
-                    <option value="divorce">Divorcé(e)</option>
-                    <option value="veuf">Veuf/Veuve</option>
-                </select>
-            </div>
+      <div class="profile-section">
+        <h2>Informations Personnelles</h2>
+        <div class="info-item">
+          <label for="cin">Numéro CIN :</label>
+          <input type="text" id="cin" formControlName="numCin">
         </div>
-        <div class="profile-section">
-            <h2>Informations Bancaires</h2>
-            <div class="info-item">
-                <label for="numCompte">Numéro de Compte:</label>
-                <input type="text" id="numCompte" [(ngModel)]="profile.numCompte">
-            </div>
-            <div class="info-item">
-                <label for="devise">Devise :</label>
-                <input type="text" id="devise" [(ngModel)]="profile.devise">
-            </div>
-            <div class="info-item">
-                <label for="dateOuverture">Date d'Ouverture :</label>
-                <input type="date" id="dateOuverture" [(ngModel)]="profile.dateOuverture">
-            </div>
+        <div class="info-item">
+          <label for="email">Email :</label>
+          <input type="email" id="email" formControlName="email">
         </div>
+        <div class="info-item">
+          <label for="prenom">Prénom :</label>
+          <input type="text" id="prenom" formControlName="prenom">
+        </div>
+        <div class="info-item">
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" formControlName="nom">
+        </div>
+        <div class="info-item">
+          <label for="dateNaissance">Date de Naissance :</label>
+          <input type="date" id="dateNaissance" formControlName="dateNaiss">
+        </div>
+        <div class="info-item">
+          <label for="lieuNaissance">Lieu de Naissance :</label>
+          <select id="lieuNaissance" formControlName="lieuNaiss">
+            <option *ngFor="let lieu of lieuNaissanceOptions" [value]="lieu">{{ lieu }}</option>
+          </select>
+        </div>
+        <div class="info-item">
+          <label for="sexe">Sexe :</label>
+          <select id="sexe" formControlName="sexe">
+            <option *ngFor="let sexe of sexeOptions" [value]="sexe">{{ sexe }}</option>
+          </select>
+        </div>
+        <div class="info-item">
+          <label for="situationFamiliale">Situation Familiale :</label>
+          <select id="situationFamiliale" formControlName="sf">
+            <option *ngFor="let sf of situationFamilialeOptions" [value]="sf">{{ sf }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="profile-section">
+        <h2>Informations Bancaires</h2>
+        <div formGroupName="comptes">
+          <div class="info-item">
+            <label for="numCompte">Numéro de Compte:</label>
+            <input type="text" id="numCompte" formControlName="numCompte">
+          </div>
+          <div class="info-item">
+            <label for="devise">Devise :</label>
+            <input type="text" id="devise" formControlName="devise">
+          </div>
+          <div class="info-item">
+            <label for="dateOuverture">Date d'Ouverture :</label>
+            <input type="date" id="dateOuverture" formControlName="dateOuverture">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn">Submit</button>
     </div>
+  </form>
 </div>

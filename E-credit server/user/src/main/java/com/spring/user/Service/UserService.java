@@ -1,12 +1,15 @@
 package com.spring.user.Service;
 
 
+import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
 import com.spring.user.FullResponse.FullUserResponseForNotif;
+import com.spring.user.Repository.CompteRepository;
 import com.spring.user.Repository.UserRepository;
 import com.spring.user.Client.DemandeCreditClient;
 import com.spring.user.Client.NotificationClient;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
 
+    private final CompteRepository compteRepository;
     private UserRepository userRepository;
     private DemandeCreditClient demandeCreditclient;
     private NotificationClient notificationClient;
@@ -28,6 +32,9 @@ public class UserService {
 
     public User createUser(User user){
         return userRepository.save(user);
+    }
+    public Compte createCompte(Compte compte){
+        return compteRepository.save(compte);
     }
 
     public Optional<User> getUserById(Long userId) {
@@ -60,21 +67,34 @@ public class UserService {
                 .notifications(notifications)
                 .build();
     }
-    public Optional<User> updateUser(Long userId, User user) {
-        Optional<User> existingUserOptional = userRepository.findById(userId);
-        if (existingUserOptional.isPresent()) {
-            User existingUser = existingUserOptional.get();
-            existingUser.setNom(user.getNom());
-            existingUser.setPrenom(user.getPrenom());
-            existingUser.setDateNaiss(user.getDateNaiss());
-            existingUser.setLieuNaiss(user.getLieuNaiss());
-            existingUser.setSexe(user.getSexe());
-            existingUser.setSf(user.getSf());
-            existingUser.setEmail(user.getEmail());
+    @Transactional
+    public Optional<User> updateUser(Long userId, User updatedUserData) {
+        return userRepository.findById(userId).map(existingUser -> {
+            if (updatedUserData.getNom() != null) {
+                existingUser.setNom(updatedUserData.getNom());
+            }
+            if (updatedUserData.getPrenom() != null) {
+                existingUser.setPrenom(updatedUserData.getPrenom());
+            }
+            if (updatedUserData.getDateNaiss() != null) {
+                existingUser.setDateNaiss(updatedUserData.getDateNaiss());
+            }
+            if (updatedUserData.getLieuNaiss() != null) {
+                existingUser.setLieuNaiss(updatedUserData.getLieuNaiss());
+            }
+            if (updatedUserData.getSexe() != null) {
+                existingUser.setSexe(updatedUserData.getSexe());
+            }
+            if (updatedUserData.getSf() != null) {
+                existingUser.setSf(updatedUserData.getSf());
+            }
+            if (updatedUserData.getEmail() != null) {
+                existingUser.setEmail(updatedUserData.getEmail());
+            }
             userRepository.save(existingUser);
-            return Optional.of(existingUser);
-        }
-        return Optional.empty();
+            return existingUser;
+        });
     }
+
 
 }

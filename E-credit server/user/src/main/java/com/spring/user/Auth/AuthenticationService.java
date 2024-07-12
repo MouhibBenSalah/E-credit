@@ -58,7 +58,7 @@ public class AuthenticationService {
         userRepository.save(user);
 
         // Generate JWT token
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user, user.getUsername());
 
         // Return AuthenticationResponse with token
         return AuthenticationResponse.builder()
@@ -77,7 +77,7 @@ public class AuthenticationService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
 
         Map<String, Object> claims = new HashMap<>();
-        String jwtToken = jwtService.generationToken(claims, user);
+        String jwtToken = jwtService.generateToken(user, user.getUsername());
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
