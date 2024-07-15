@@ -9,6 +9,7 @@ import com.spring.user.Repository.CompteRepository;
 import com.spring.user.Repository.UserRepository;
 import com.spring.user.Client.DemandeCreditClient;
 import com.spring.user.Client.NotificationClient;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,14 +34,16 @@ public class UserService {
     public User createUser(User user){
         return userRepository.save(user);
     }
-    public Compte createCompte(Compte compte){
+
+    public Compte creerComptePourClient(Long userId, Compte compte) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+        compte.setUser(user);
         return compteRepository.save(compte);
     }
-
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
-
     public User getUserByCin(Long cin) {
         return userRepository.findByNumCin(cin)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -53,6 +56,11 @@ public class UserService {
         var demandesCredit= demandeCreditclient.findAllDemandesCreditByUser(id);
         return FullUserResponse.builder()
                 .nom(user.getNom())
+                .prenom(user.getPrenom())
+                .role(user.getRole())
+                .numCin(user.getNumCin())
+                .dateNaiss(user.getDateNaiss())
+                .sf(user.getSf())
                 .demandesCredit(demandesCredit)
                 .build();
     }

@@ -48,6 +48,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private SEXE sexe;
 
+    @Enumerated(EnumType.STRING)
     private SituationFamiliale sf;
     private String profilePicture = "../../assets/images/man3.jpg";
 
@@ -57,7 +58,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Compte> comptes;
 
     @Override

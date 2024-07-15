@@ -57,12 +57,14 @@ constructor(private auth: AuthService, private router: Router, private builder: 
           dateOuverture: compte.dateOuverture
         }));
   
+        const formattedDateNaiss = this.formatDate(new Date(res.dateNaiss));
+
         this.userForm.setValue({
           numCin: res.numCin,
           email: res.email,
           prenom: res.prenom,
           nom: res.nom,
-          dateNaiss: res.dateNaiss,
+          dateNaiss: formattedDateNaiss,
           lieuNaiss: res.lieuNaiss,
           sexe: res.sexe,
           sf: res.sf,
@@ -79,7 +81,15 @@ constructor(private auth: AuthService, private router: Router, private builder: 
       }
     });
     
+    
   }
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+ 
 
   onSubmit(): void {
     if (this.userForm.valid) {

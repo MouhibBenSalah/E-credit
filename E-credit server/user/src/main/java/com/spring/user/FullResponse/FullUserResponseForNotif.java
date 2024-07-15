@@ -26,8 +26,5 @@ public class FullUserResponseForNotif {
     private String prenom;
     private Date dateNaiss;
     private SituationFamiliale sf;
-    private int NumCompte;
-    private Date dateOuvCompte;
-    private String deviseC;
     List<NotificationDTO> notifications;
 }

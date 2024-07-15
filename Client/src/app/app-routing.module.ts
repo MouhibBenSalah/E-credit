@@ -7,6 +7,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ProfileComponent } from './profile/profile.component';
 import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
 import { authGuard, LoggedGuard } from './services/auth.guard';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { adminGuard } from './services/admin.guard';
 
 const routes: Routes = [
   {
@@ -41,6 +43,12 @@ const routes: Routes = [
     component: DemandeCreditComponent,
     canActivate:[authGuard],
     title:'Mes Demandes Credit'
+  },
+  {
+    path:'adminDashboard',
+    component:AdminDashboardComponent,
+    canActivate: [  adminGuard],
+    title: 'Admin Dashboard'
   }
 ];
 

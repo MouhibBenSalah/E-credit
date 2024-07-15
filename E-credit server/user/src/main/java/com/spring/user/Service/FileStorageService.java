@@ -18,7 +18,7 @@ import java.io.IOException;
 @Service
 public class FileStorageService {
 
-    @Value("${upload.directory}") // Read from application.properties or application.yml
+    @Value("${upload.directory}") // Read from application.properties
     private String uploadDir;
     private final UserRepository userRepository;
 
