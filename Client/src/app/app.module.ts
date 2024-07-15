@@ -18,6 +18,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { DemandeCreditComponent } from './demande-credit/demande-credit.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthService } from './services/auth.service';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AuthService } from './services/auth.service';
     ResetPasswordComponent,
     ProfileComponent,
     SidebarComponent,
-    DemandeCreditComponent
+    DemandeCreditComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

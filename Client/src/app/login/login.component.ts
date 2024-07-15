@@ -2,6 +2,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { User } from '../entities/user';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,6 +21,8 @@ export class LoginComponent {
 
   signupForm: FormGroup;
   signupError: string = ''; 
+
+  currentUser! :User;
 
     constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) {
       this.loginForm = this.fb.group({
@@ -103,7 +106,14 @@ export class LoginComponent {
       this.auth.login(credentials).subscribe({
         next: (result) => {  
           this.auth.setToken(result.token);
+        const currentUser = this.auth.currentUser();
+
+        if (currentUser && currentUser.role === 'Admin') {
+          this.router.navigate(['/adminDashboard']);
+        } else {
           this.router.navigate(['/']);
+        }
+        
         },
         error: (err) => {
           this.loginError = "Erreur d'authentification";

@@ -44,18 +44,18 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByCin(cin));
     }
     @GetMapping("/id/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> userOptional = userService.getUserById(id);
-        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<User> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
     @PostMapping
     public User createUser(@RequestBody User u) {
         return userService.createUser(u);
     }
 
-    @PostMapping("/compte")
-    public Compte createCompte(@RequestBody Compte c) {
-        return userService.createCompte(c);
+    @PostMapping("/compte/{userId}")
+    public ResponseEntity<Compte> addCompteToUser(@PathVariable Long userId, @RequestBody Compte compte) {
+        Compte savedCompte = userService.creerComptePourClient(userId, compte);
+        return ResponseEntity.ok(savedCompte);
     }
 
     @PatchMapping("/{id}")
