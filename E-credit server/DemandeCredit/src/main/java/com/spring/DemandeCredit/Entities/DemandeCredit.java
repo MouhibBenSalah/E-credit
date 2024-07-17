@@ -20,7 +20,7 @@ public class DemandeCredit {
     private Long id;
 
     private Date dateEntreeRelation;
-    private String observation;
+    private  Integer numDemande;
 
     @Enumerated(EnumType.STRING)
     private TypeCredit typeCredit;
@@ -28,8 +28,8 @@ public class DemandeCredit {
     @Enumerated(EnumType.STRING)
     private TypeUnite unite;
     private float montant;
-    private Integer nbrEcheances;
     private Float interet;
+    private Integer duree;
 
     @OneToMany(mappedBy = "demandeCredit", cascade = CascadeType.ALL)
     private Set<PieceJointe> pieceJointes;

@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByCin(cin));
     }
     @GetMapping("/id/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
     @PostMapping
@@ -53,9 +53,8 @@ public class UserController {
     }
 
     @PostMapping("/compte/{userId}")
-    public ResponseEntity<Compte> addCompteToUser(@PathVariable Long userId, @RequestBody Compte compte) {
-        Compte savedCompte = userService.creerComptePourClient(userId, compte);
-        return ResponseEntity.ok(savedCompte);
+    public Compte addCompteToUser(@PathVariable Long userId, @RequestBody Compte compte) {
+        return userService.creerComptePourClient(userId, compte);
     }
 
     @PatchMapping("/{id}")
@@ -88,5 +87,14 @@ public class UserController {
     public ResponseEntity<User> getCurrentUser(Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();
         return ResponseEntity.ok(currentUser);
+    }
+
+    @PostMapping("/CalculRatioDendettement")
+    public double CalculRatioDendettement(@RequestBody User user) {
+        return userService.CalculRatioDendettement(user);
+    }
+    @PostMapping("/calculateRepaymentCapacity")
+    public double calculateRepaymentCapacity(@RequestBody User user) {
+        return userService.calculateRepaymentCapacity(user);
     }
 }
