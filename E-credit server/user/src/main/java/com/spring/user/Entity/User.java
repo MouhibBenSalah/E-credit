@@ -1,18 +1,20 @@
 package com.spring.user.Entity;
 
-import com.spring.user.Enum.LIEU_NAISSANCE;
-import com.spring.user.Enum.Role;
-import com.spring.user.Enum.SEXE;
-import com.spring.user.Enum.SituationFamiliale;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.spring.user.Enum.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.processing.Pattern;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@EqualsAndHashCode(exclude = "comptes")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -50,6 +54,7 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private SituationFamiliale sf;
+
     private String profilePicture = "../../assets/images/man3.jpg";
 
     @Column(nullable = false, unique = true)
@@ -58,12 +63,31 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    private Double revenuMensuel;
+    private Double chargesMensuelles;
+    private Double salaire;
+
+    @Enumerated(EnumType.STRING)
+    private EmploymentType employmentType;
+
+    @Transient
+    private Integer age;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("user")
     private Set<Compte> comptes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public int getAge() {
+        if (this.dateNaiss == null) {
+            return 0;
+        }
+        LocalDate birthDate = this.dateNaiss.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     @Override

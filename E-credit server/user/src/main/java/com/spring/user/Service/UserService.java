@@ -12,6 +12,7 @@ import com.spring.user.Client.NotificationClient;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
 
+    @Autowired
     private final CompteRepository compteRepository;
+    @Autowired
     private UserRepository userRepository;
     private DemandeCreditClient demandeCreditclient;
     private NotificationClient notificationClient;
@@ -36,13 +39,14 @@ public class UserService {
     }
 
     public Compte creerComptePourClient(Long userId, Compte compte) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         compte.setUser(user);
+        user.getComptes().add(compte);
         return compteRepository.save(compte);
     }
-    public Optional<User> getUserById(Long userId) {
-        return userRepository.findById(userId);
+    public User getUserById(Long userId) {
+
+        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
     }
     public User getUserByCin(Long cin) {
         return userRepository.findByNumCin(cin)
@@ -102,6 +106,19 @@ public class UserService {
             userRepository.save(existingUser);
             return existingUser;
         });
+    }
+    public double CalculRatioDendettement(User user) {
+        double chargesMensuelles = user.getChargesMensuelles();
+        double revenuMensuel = user.getRevenuMensuel();
+        double salaire = user.getSalaire();
+        return (chargesMensuelles / revenuMensuel + salaire) * 100;
+    }
+
+    public double calculateRepaymentCapacity(User user) {
+        double chargesMensuelles = user.getChargesMensuelles();
+        double revenuMensuel = user.getRevenuMensuel();
+        double salaire = user.getSalaire();
+        return revenuMensuel + salaire - chargesMensuelles;
     }
 
 

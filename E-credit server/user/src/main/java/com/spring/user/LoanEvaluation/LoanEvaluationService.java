@@ -3,12 +3,13 @@ package com.spring.user.LoanEvaluation;
 import com.spring.user.DTO.DemandeCreditDTO;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
+import com.spring.user.Enum.EmploymentType;
 import com.spring.user.Enum.EtatCompte;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoanEvaluationService {
-    @Override
+
     public double calculateScore(User user) {
         // Calcul des scores individuels pour revenuMensuel, salaire et chargesMensuelles
         double scoreRevenuMensuel;
@@ -57,7 +58,6 @@ public class LoanEvaluationService {
         return w1 * ageScore + w2 * employmentScore + w3 * revenuNetScore;
     }
 
-    @Override
     public String evaluateRisk(Compte compteBancaire, DemandeCreditDTO demandeCredit ) {
         double riskScore = 0.0;
         // Calculer le risque basé sur l'état du compte
@@ -77,8 +77,8 @@ public class LoanEvaluationService {
         }
     }
 
-    @Override
-    public String approveCredit(User user, CompteBancaire compteBancaire, DemandeCredit demandeCredit) {
+
+    public String approveCredit(User user, Compte compteBancaire, DemandeCreditDTO demandeCredit) {
         double score = calculateScore(user);
         String riskLevel = evaluateRisk( compteBancaire, demandeCredit);
 
@@ -92,11 +92,11 @@ public class LoanEvaluationService {
         }
     }
 
-    @Override
+
     public double calculateAgeScore(Integer age) {
         return 100 - age;
     }
-    @Override
+
     public double calculateEmploymentScore(EmploymentType employmentType) {
         return switch (employmentType) {
             case PUBLIC -> 90;
