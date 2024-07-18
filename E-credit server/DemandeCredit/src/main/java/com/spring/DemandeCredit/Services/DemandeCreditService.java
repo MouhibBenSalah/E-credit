@@ -40,7 +40,6 @@ public class DemandeCreditService {
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-
         // Assigner l'ID de l'utilisateur à la demande de crédit
         demandeCredit.setUserId(idUser);
 

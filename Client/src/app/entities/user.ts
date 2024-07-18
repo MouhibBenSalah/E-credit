@@ -8,6 +8,7 @@ export interface User {
     nom: string;
     prenom: string;
     dateNaiss: Date;
+    formattedDateNaiss?: string;
     lieuNaiss: LieuNaissance;
     sexe: Sexe;
     sf: SituationFamiliale;
