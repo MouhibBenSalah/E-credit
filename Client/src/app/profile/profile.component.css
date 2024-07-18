@@ -5,10 +5,10 @@
     }
 }
 .main {
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
     margin-left: 230px;
 }
 
@@ -33,7 +33,19 @@
     padding-bottom: 5px;
     margin-bottom: 10px;
 }
-
+h6 {
+    font-weight: bold;
+    color: #343a40; /* Dark color */
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+h6::after {
+    content: "";
+    display: block;
+    width: 130px; 
+    border-bottom: 2px solid #bdc3c7; 
+    margin-top: 5px; 
+}
 .info-item {
     margin-bottom: 10px;
 }

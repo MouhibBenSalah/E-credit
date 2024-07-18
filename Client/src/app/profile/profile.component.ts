@@ -55,12 +55,13 @@ export class ProfileComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  onSubmit(): void {
+   onSubmit(): void {
     if (this.user) {
       this.authService.updateUser(this.currentUser.id, this.user).subscribe({
         next: (updatedUser) => {
           console.log('User updated successfully:', updatedUser);
           this.getUserData(this.currentUser.id);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.error('Error updating user data', err);

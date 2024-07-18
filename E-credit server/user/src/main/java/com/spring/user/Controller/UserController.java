@@ -1,5 +1,6 @@
 package com.spring.user.Controller;
 
+import com.spring.user.DTO.UpdateUserDTO;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
@@ -58,9 +59,8 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updateUserPartial(@PathVariable Long id, @RequestBody User user) {
-        Optional<User> updatedUser = userService.updateUser(id, user);
-        return updatedUser.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public User updateUser(@PathVariable Long id, @RequestBody UpdateUserDTO updateUserDTO) {
+        return userService.updateUser(id, updateUserDTO);
     }
 
     @GetMapping("/with-demandesCredit/{userId}")

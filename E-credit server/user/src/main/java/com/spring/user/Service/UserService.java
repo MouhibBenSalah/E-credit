@@ -1,6 +1,7 @@
 package com.spring.user.Service;
 
 
+import com.spring.user.DTO.UpdateUserDTO;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
@@ -79,33 +80,36 @@ public class UserService {
                 .notifications(notifications)
                 .build();
     }
-    @Transactional
-    public Optional<User> updateUser(Long userId, User updatedUserData) {
-        return userRepository.findById(userId).map(existingUser -> {
-            if (updatedUserData.getNom() != null) {
-                existingUser.setNom(updatedUserData.getNom());
+
+    public User updateUser(Long userId, UpdateUserDTO updateUserDTO) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (updateUserDTO.getNom() != null) {
+                user.setNom(updateUserDTO.getNom());
             }
-            if (updatedUserData.getPrenom() != null) {
-                existingUser.setPrenom(updatedUserData.getPrenom());
+            if (updateUserDTO.getPrenom() != null) {
+                user.setPrenom(updateUserDTO.getPrenom());
             }
-            if (updatedUserData.getDateNaiss() != null) {
-                existingUser.setDateNaiss(updatedUserData.getDateNaiss());
+            if (updateUserDTO.getEmail() != null) {
+                user.setEmail(updateUserDTO.getEmail());
             }
-            if (updatedUserData.getLieuNaiss() != null) {
-                existingUser.setLieuNaiss(updatedUserData.getLieuNaiss());
+            if (updateUserDTO.getDateNaiss() != null) {
+                user.setDateNaiss(updateUserDTO.getDateNaiss());
             }
-            if (updatedUserData.getSexe() != null) {
-                existingUser.setSexe(updatedUserData.getSexe());
+            if (updateUserDTO.getLieuNaiss() != null) {
+                user.setLieuNaiss(updateUserDTO.getLieuNaiss());
             }
-            if (updatedUserData.getSf() != null) {
-                existingUser.setSf(updatedUserData.getSf());
+            if (updateUserDTO.getSexe() != null) {
+                user.setSexe(updateUserDTO.getSexe());
             }
-            if (updatedUserData.getEmail() != null) {
-                existingUser.setEmail(updatedUserData.getEmail());
+            if (updateUserDTO.getSf() != null) {
+                user.setSf(updateUserDTO.getSf());
             }
-            userRepository.save(existingUser);
-            return existingUser;
-        });
+            return userRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
     }
     public double CalculRatioDendettement(User user) {
         double chargesMensuelles = user.getChargesMensuelles();
