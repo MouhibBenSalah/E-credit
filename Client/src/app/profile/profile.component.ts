@@ -13,75 +13,40 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userForm!: FormGroup;
-  currentUser!: User;
-  error: string = '';
-
+  user: User | null = null;
+  accounts: Compte[] = [];
+  currentUser: User;
   lieuNaissanceOptions = Object.values(LieuNaissance);
   sexeOptions = Object.values(Sexe);
   situationFamilialeOptions = Object.values(SituationFamiliale);
 
-constructor(private auth: AuthService, private router: Router, private builder: FormBuilder) {}
-
-  ngOnInit() {
-    this.currentUser = this.auth.currentUser();
+  constructor(private authService: AuthService, private router: Router) {
+    this.currentUser = this.authService.currentUser();
     console.log(this.currentUser);
-    this.getUser();
-
-    this.userForm= this.builder.group({
-      numCin: this.builder.control(''),
-      email: this.builder.control(''),
-      prenom: this.builder.control(''),
-      nom: this.builder.control(''),
-      dateNaiss: this.builder.control(''),
-      lieuNaiss: this.builder.control(''),
-      sexe: this.builder.control(''),
-      sf: this.builder.control(''),
-      comptes: this.builder.group({
-        numCompte: this.builder.control(''),
-        devise: this.builder.control(''),
-        dateOuverture: this.builder.control('')
-      })
-    });
-
   }
 
-  getUser() {
-    this.auth.getUserById(this.currentUser.id).subscribe({
-      next: res => {
-        console.log(res);
-  
-        const comptes = res.comptes.map(compte => ({
-          numCompte: compte.numCompte,
-          devise: compte.devise,
-          dateOuverture: compte.dateOuverture
-        }));
-  
-        const formattedDateNaiss = this.formatDate(new Date(res.dateNaiss));
+  ngOnInit(): void {
+    this.getUserData(this.currentUser.id);
+  }
 
-        this.userForm.setValue({
-          numCin: res.numCin,
-          email: res.email,
-          prenom: res.prenom,
-          nom: res.nom,
-          dateNaiss: formattedDateNaiss,
-          lieuNaiss: res.lieuNaiss,
-          sexe: res.sexe,
-          sf: res.sf,
-          comptes: comptes 
+  getUserData(id: number): void {
+    this.authService.getUserById(id).subscribe({
+      next: (data: User) => {
+        if (data.dateNaiss) {
+          data.formattedDateNaiss = this.formatDate(new Date(data.dateNaiss));
         }
-      );
-        
-  
-      }, error: (err: HttpErrorResponse) => {
+        console.log(data)
+        this.user = data;
+        this.accounts = data.comptes;
+      },
+      error: (err) => {
+        console.error('Error fetching user data', err);
         if (err.status === 401) {
-          this.auth.logout();
+          this.authService.logout();
           this.router.navigate(['/']);
         }
       }
     });
-    
-    
   }
   formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -89,18 +54,19 @@ constructor(private auth: AuthService, private router: Router, private builder: 
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
- 
 
   onSubmit(): void {
-    if (this.userForm.valid) {
-      this.auth.updateUser(this.currentUser.id, this.userForm.value).subscribe(
-        (response: any) => {
-          console.log('User updated successfully', response);
+    if (this.user) {
+      this.authService.updateUser(this.currentUser.id, this.user).subscribe({
+        next: (updatedUser) => {
+          console.log('User updated successfully:', updatedUser);
+          this.getUserData(this.currentUser.id);
         },
-        (error: any) => {
-          console.error('Error updating user', error);
+        error: (err) => {
+          console.error('Error updating user data', err);
         }
-      );
+      });
     }
   }
+
 }
