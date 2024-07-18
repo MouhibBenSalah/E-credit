@@ -7,11 +7,11 @@
           <h2>Informations Personnelles</h2>
           <div class="info-item">
             <label for="cin">Numéro CIN :</label>
-            <input type="text" id="cin" [(ngModel)]="user.numCin" name="numCin">
+            <input type="text" id="cin" [(ngModel)]="user.numCin" name="numCin" readonly>
           </div>
           <div class="info-item">
             <label for="email">Email :</label>
-            <input type="email" id="email" [(ngModel)]="user.email" name="email">
+            <input type="email" id="email" [(ngModel)]="user.email" name="email" >
           </div>
           <div class="info-item">
             <label for="prenom">Prénom :</label>
@@ -46,7 +46,8 @@
         </div>
         <div class="profile-section">
           <h2>Informations Bancaires</h2>
-          <div *ngFor="let account of user.comptes">
+          <div class="acc-info" *ngFor="let account of user.comptes; let i =index">
+            <h6>Compte no {{ i + 1 }} :</h6>
             <div class="info-item">
               <label for="numCompte">Numéro de Compte:</label>
               <input type="text" [value]="account.numCompte" disabled>

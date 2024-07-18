@@ -55,7 +55,8 @@ export class AuthService {
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUser}id/${id}`);
   }
-  updateUser(id: number, user: User): Observable<User> {
+  
+  updateUser(id: number, user: Partial<User>): Observable<User> {
     return this.http.patch<User>(`${this.apiUser}${id}`, user);
   }
   
