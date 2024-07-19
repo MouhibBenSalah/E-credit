@@ -1,11 +1,14 @@
 package com.spring.DemandeCredit.Services;
 
+import com.spring.DemandeCredit.DTO.UserDTO;
 import com.spring.DemandeCredit.Entities.DemandeCredit;
 import com.spring.DemandeCredit.Enum.TypeUnite;
 import com.spring.DemandeCredit.Repositories.DemandeCreditRepository;
 import lombok.AllArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,21 +34,21 @@ public class DemandeCreditService {
     public List<DemandeCredit> findAllDemandeCreditByUser(Long userId) {
         return demandeCreditRepository.findAllByUserId(userId);
     }
-    public DemandeCredit addDemandeCredit(Long idUser, DemandeCredit demandeCredit) {
+    public DemandeCredit addDemandeCredit(Long idU, DemandeCredit demandeCredit) {
         // Appel au service d'authentification pour vérifier si l'utilisateur existe
-        String userServiceUrl = "http://localhost:4020/login/" + idUser;
-
+        String userServiceUrl = "http://localhost:4020/auth/login/" + idU;
         User user = restTemplate.getForObject(userServiceUrl, User.class);
 
         if (user == null) {
             throw new RuntimeException("User not found");
         }
         // Assigner l'ID de l'utilisateur à la demande de crédit
-        demandeCredit.setUserId(idUser);
+        demandeCredit.setUserId(idU);
 
         // Sauvegarder la demande de crédit dans la base de données
         return demandeCreditRepository.save(demandeCredit);
     }
+
     public Float simulateur(Float montant, Integer duree, Float interet, TypeUnite unite) {
         // Calcul du taux d'intérêt annuel, trimestriel et semestriel à partir du taux mensuel
         float interetAnnuelle = (float) (Math.pow(1 + interet, 12) - 1);

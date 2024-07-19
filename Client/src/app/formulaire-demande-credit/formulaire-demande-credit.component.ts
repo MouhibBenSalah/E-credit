@@ -10,7 +10,7 @@ export class FormulaireDemandeCreditComponent {
 
   sexeOptions = Object.values(Sexe);
   situationFamilialeOptions = Object.values(SituationFamiliale);
-  step = 3;
+  step = 1;
 
   nextStep() {
     this.step++;

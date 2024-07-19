@@ -14,13 +14,14 @@
                   Join Now<i class="fa fa-arrow-right ms-3"></i>
                 </a>
               </li>
-              <li *ngIf="auth.isLoggedIn()">
+              <li *ngIf="auth.isLoggedIn() && auth.currentUser()?.role === 'Client' ">
                 <div class="nav-item dropdown">
                   <div class="picon profile">
                     <img src="../../assets/images/fcbk.png" alt="user-img">
                   </div>
                   <div class="dropdown-menu fade-down m-0">
                     <a routerLink="/profile" class="dropdown-item" routerLinkActive="active">Mon Profil</a>
+                    <a routerLink="/formulaireDemandeCredit" class="dropdown-item" routerLinkActive="active">Demander Un Credit</a>
                     <a routerLink="/demandeCredit" class="dropdown-item" routerLinkActive="active">Mes Demandes Credit</a>
                     <a class="dropdown-item" (click)="logout()">Deconnecter</a>
                   </div>
