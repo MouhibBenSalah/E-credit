@@ -37,3 +37,15 @@ export enum Role {
     Celibataire='Celibataire',
     Maried='Maried'
   }
+  export enum TypeCredit {
+    Personnel ='Personnel',
+    Amenagement ='Amenagement',
+    AutoNeuve='AutoNeuve',
+    AutoOccasion = 'AutoOccasion'
+  }
+  export enum TypeUnite {
+    MENSUELLE ='MENSUELLE',
+    SEMESTRIELLE= 'SEMESTRIELLE',
+    TRIMESTRIELLE = 'TRIMESTRIELLE',
+    ANNUELLE='ANNUELLE'
+  }

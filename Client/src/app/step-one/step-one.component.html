@@ -1,0 +1,47 @@
+<div class="form h-100">
+    <h3>Informations Client</h3>
+    <form class="mb-5" method="post" id="contactForm" name="contactForm">
+      <div class="row" >
+        <div class="col-md-4 form-group mb-5">
+          <label for="" class="col-form-label">Nom *</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Nom">
+        </div>
+        <div class="col-md-4 form-group mb-5">
+          <label for="" class="col-form-label">Prenom *</label>
+          <input type="text" class="form-control" name="prenom" id="prenom"  placeholder="Prenom">
+        </div>
+        <div class="col-md-4 form-group mb-5">
+          <label for="" class="col-form-label">Num Cin *</label>
+          <input type="text" class="form-control" name="numCin" id="numCin"  placeholder="numero Cin">
+        </div>
+      </div>
+
+      <div class="row" >
+        <div class="col-md-4 form-group mb-5">
+            <label for="" class="col-form-label">Date de Naissance</label>
+            <input type="date" class="form-control" name="date de Naissance" id="dateNaissance">
+          </div>
+        <div class="col-md-4 form-group mb-5">
+            <label for="" class="col-form-label">Sexe</label>
+            <select id="sexe" name="sexe">
+                <option *ngFor="let sexe of sexeOptions" [value]="sexe">{{ sexe }}</option>
+            </select>
+        </div>
+        <div class="col-md-4 form-group mb-5">
+            <label for="" class="col-form-label">Situation Familiale</label>
+            <select id="situationFamiliale" name="sf">
+                <option *ngFor="let sf of situationFamilialeOptions" [value]="sf">{{ sf }}</option>
+            </select>
+          </div>
+      </div>
+
+      <div class="row" >
+       
+            <div class="col-md-6 form-group mb-5">
+                <label for="" class="col-form-label">Email *</label>
+                <input type="text" class="form-control" name="email" id="email"  placeholder="Email">
+              </div>
+        
+      </div>
+    </form>
+</div>
