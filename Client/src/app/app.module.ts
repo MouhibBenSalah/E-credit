@@ -19,6 +19,11 @@ import { DemandeCreditComponent } from './demande-credit/demande-credit.componen
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { FormulaireDemandeCreditComponent } from './formulaire-demande-credit/formulaire-demande-credit.component';
+import { StepOneComponent } from './step-one/step-one.component';
+import { StepTwoComponent } from './step-two/step-two.component';
+import { StepThreeComponent } from './step-three/step-three.component';
+import { StepFourComponent } from './step-four/step-four.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     ProfileComponent,
     SidebarComponent,
     DemandeCreditComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    FormulaireDemandeCreditComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent,
+    StepFourComponent
   ],
   imports: [
     BrowserModule,

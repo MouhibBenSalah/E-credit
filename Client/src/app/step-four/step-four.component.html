@@ -1,0 +1,24 @@
+<div class="pieces-jointes-container">
+    <h3>Pièces jointes</h3>
+    <table class="pieces-jointes-table">
+      <thead>
+        <tr>
+          <th>Documents</th>
+          <th>Obligatoire</th>
+          <th>Statut</th>
+          <th>Upload</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{document.nom}}</td>
+          <td>{{document.obligatoire}}</td>
+          <td><input type="checkbox" [(ngModel)]="document.statut"></td>
+          <td>
+            <input type="file" (change)="onFileChange($event, document)" class="upload-input">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

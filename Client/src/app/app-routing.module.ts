@@ -9,6 +9,7 @@ import { DemandeCreditComponent } from './demande-credit/demande-credit.componen
 import { authGuard, LoggedGuard } from './services/auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './services/admin.guard';
+import { FormulaireDemandeCreditComponent } from './formulaire-demande-credit/formulaire-demande-credit.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,12 @@ const routes: Routes = [
     component:AdminDashboardComponent,
     canActivate: [  adminGuard],
     title: 'Admin Dashboard'
+  },
+  {
+    path:'formulaireDemandeCredit',
+    component:FormulaireDemandeCreditComponent,
+    canActivate:[authGuard],
+    title:'Formulaire de Demande Credit'
   }
 ];
 
