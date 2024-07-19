@@ -43,7 +43,4 @@ public class DemandeCredit {
 
     private Long userId;
 
-
-
-
 }

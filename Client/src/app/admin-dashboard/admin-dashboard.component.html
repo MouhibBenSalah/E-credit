@@ -1,1 +1,78 @@
-<p>admin-dashboard works!</p>
+<div class="dashboard-container">
+    <!-- Sidebar -->
+<app-admin-sidebar></app-admin-sidebar>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <h1>Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button><i class="fa fa-search"></i></button>
+          </div>
+          <div class="profile">
+            <img src="https://via.placeholder.com/40" alt="Profile">
+            <span>Admin</span>
+          </div>
+        </div>
+      </header>
+  
+      <!-- Main Section -->
+      <section class="content">
+        <!-- Overview Cards -->
+        <div class="overview-cards">
+          <div class="card">
+            <h3>Total Users</h3>
+            <p>1,234</p>
+          </div>
+          <div class="card">
+            <h3>Total Sales</h3>
+            <p>$5,678</p>
+          </div>
+          <div class="card">
+            <h3>New Messages</h3>
+            <p>56</p>
+          </div>
+          <div class="card">
+            <h3>Pending Tasks</h3>
+            <p>12</p>
+          </div>
+        </div>
+  
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+          <h2>Recent Activity</h2>
+          <ul>
+            <li>
+              <span class="activity-time">2 hours ago</span>
+              <p>User John Doe updated profile.</p>
+            </li>
+            <li>
+              <span class="activity-time">1 day ago</span>
+              <p>New order received from Jane Smith.</p>
+            </li>
+            <li>
+              <span class="activity-time">3 days ago</span>
+              <p>Server maintenance completed successfully.</p>
+            </li>
+          </ul>
+        </div>
+  
+        <!-- Charts Section -->
+        <div class="charts-section">
+          <div class="chart">
+            <h2>Sales Overview</h2>
+            <canvas id="sales-chart"></canvas>
+          </div>
+          <div class="chart">
+            <h2>Traffic Sources</h2>
+            <canvas id="traffic-chart"></canvas>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
