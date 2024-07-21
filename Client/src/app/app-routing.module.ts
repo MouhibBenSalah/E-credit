@@ -10,6 +10,7 @@ import { authGuard, LoggedGuard } from './services/auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './services/admin.guard';
 import { FormulaireDemandeCreditComponent } from './formulaire-demande-credit/formulaire-demande-credit.component';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,12 @@ const routes: Routes = [
     component:FormulaireDemandeCreditComponent,
     canActivate:[authGuard],
     title:'Formulaire de Demande Credit'
+  },
+  {
+    path:'profilAdmin',
+    component:ProfilAdminComponent,
+    canActivate:[adminGuard],
+    title:'Profile Admin'
   }
 ];
 

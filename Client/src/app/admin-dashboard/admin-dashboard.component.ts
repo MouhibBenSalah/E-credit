@@ -10,31 +10,86 @@ export class AdminDashboardComponent {
   salesChart: Chart | undefined;
   trafficChart: Chart | undefined;
 
-  ngOnInit(): void {
-    this.initializeCharts();
-  }
-
-  private initializeCharts(): void {
-    // Sales Overview Chart
-    const ctxSales = document.getElementById('sales-chart') as HTMLCanvasElement;
-    this.salesChart = new Chart(ctxSales.getContext('2d')!, {
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-          label: 'Sales',
-          data: [30, 40, 35, 50, 60, 70, 90],
-          borderColor: '#007bff',
-          backgroundColor: 'rgba(0, 123, 255, 0.1)',
-          fill: true
-        }]
+    orders = [
+      {
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Seoul',
+        orderDate: '17 Dec, 2022',
+        status: 'Delivered',
+        amount: 128.90
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
+      {
+        id: 2,
+        customerName: 'Jeet Saru',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Paris',
+        orderDate: '27 Aug, 2023',
+        status: 'Cancelled',
+        amount: 5350.50
+      },
+      {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      },
+      {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      },  {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      }, {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      }, {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      }, {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      }, {
+        id: 3,
+        customerName: 'Sonal Gharti',
+        customerImage: '../../assets/images/fcbk.png',
+        location: 'Tokyo',
+        orderDate: '14 Mar, 2023',
+        status: 'Shipped',
+        amount: 210.40
+      },
+      // Add more orders as needed
+    ];
 
     // Traffic Sources Chart
   }
-}
+
