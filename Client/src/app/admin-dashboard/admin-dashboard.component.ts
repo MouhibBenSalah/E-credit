@@ -15,78 +15,71 @@ export class AdminDashboardComponent {
         id: 1,
         customerName: 'Zinzua Chan Lee',
         customerImage: '../../assets/images/fcbk.png',
-        location: 'Seoul',
-        orderDate: '17 Dec, 2022',
-        status: 'Delivered',
-        amount: 128.90
-      },
-      {
-        id: 2,
-        customerName: 'Jeet Saru',
-        customerImage: '../../assets/images/fcbk.png',
-        location: 'Paris',
-        orderDate: '27 Aug, 2023',
-        status: 'Cancelled',
-        amount: 5350.50
-      },
-      {
-        id: 3,
-        customerName: 'Sonal Gharti',
-        customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
-      },
-      {
-        id: 3,
-        customerName: 'Sonal Gharti',
-        customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Acceptée',
+        montant: '128.90 DT'
       },  {
-        id: 3,
-        customerName: 'Sonal Gharti',
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
         customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Rejetée',
+        montant: '128.90 DT'
       }, {
-        id: 3,
-        customerName: 'Sonal Gharti',
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
         customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Acceptée',
+        montant: '128.90 DT'
       }, {
-        id: 3,
-        customerName: 'Sonal Gharti',
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
         customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
-      }, {
-        id: 3,
-        customerName: 'Sonal Gharti',
-        customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
-      }, {
-        id: 3,
-        customerName: 'Sonal Gharti',
-        customerImage: '../../assets/images/fcbk.png',
-        location: 'Tokyo',
-        orderDate: '14 Mar, 2023',
-        status: 'Shipped',
-        amount: 210.40
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Rejetée',
+        montant: '128.90 DT'
       },
+      {
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
+        customerImage: '../../assets/images/fcbk.png',
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Acceptée',
+        montant: '128.90 DT'
+      },
+      {
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
+        customerImage: '../../assets/images/fcbk.png',
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Acceptée',
+        montant: '128.90 DT'
+      },
+      {
+        id: 1,
+        customerName: 'Zinzua Chan Lee',
+        customerImage: '../../assets/images/fcbk.png',
+        type: 'Amenagement',
+        unite: 'trimestrielle',
+        duree: '5 ans',
+        status: 'Rejetée',
+        montant: '128.90 DT'
+      },
+    
+    
       // Add more orders as needed
     ];
 

@@ -1,6 +1,7 @@
 .sidebar {
     width: 250px;
-    background: linear-gradient( #00283f,#ff3e00);
+    background-color:#00283f ;
+  /*  background: linear-gradient( #00283f,#ff3e00);*/
     color: #fff;
     box-shadow: 2px 0px 10px rgba(180, 165, 165, 0.2); 
     z-index: 1000; 

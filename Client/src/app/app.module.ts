@@ -27,6 +27,8 @@ import { StepFourComponent } from './step-four/step-four.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { ClientTableComponent } from './client-table/client-table.component';
+import { SecurityAdminComponent } from './security-admin/security-admin.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
     StepFourComponent,
     AdminSidebarComponent,
     ProfilAdminComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    ClientTableComponent,
+    SecurityAdminComponent
   ],
   imports: [
     BrowserModule,
