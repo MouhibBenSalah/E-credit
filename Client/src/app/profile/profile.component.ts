@@ -57,6 +57,9 @@ export class ProfileComponent implements OnInit {
     if (this.user) {
       this.authService.updateUser(this.currentUser.id, this.user).subscribe({
         next: (updatedUser) => {
+          if (updatedUser.dateNaiss) {
+            updatedUser.formattedDateNaiss = this.formatDate(new Date(updatedUser.dateNaiss));
+          }
           console.log('User updated successfully:', updatedUser);
           this.getUserData(this.currentUser.id);
           this.router.navigate(['/']);

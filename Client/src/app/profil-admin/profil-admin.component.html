@@ -1,10 +1,11 @@
+<div class="all">
 <app-admin-sidebar></app-admin-sidebar>
 <app-admin-navbar></app-admin-navbar>
-    <nav class="sub-navbar">
-        <a href="#" class="sub-nav-link active">ACCOUNT</a>
-        <a href="#" class="sub-nav-link">SECURITY</a>
-        <a href="#" class="sub-nav-link">NOTIFICATIONS</a>
-    </nav>
+<nav class="sub-navbar">
+    <a routerLink="/profilAdmin" class="sub-nav-link active"><i class="fa-regular fa-user"></i>PROFIL</a>
+    <a href="/securityAdmin" class="sub-nav-link"><i class="fa-solid fa-lock-open"></i>SECURITE</a>
+    <a href="#" class="sub-nav-link"><i class="fa-regular fa-bell"></i>NOTIFICATIONS</a>
+</nav>
 
 <div class="account-details">
     <div class="profile-picture">
@@ -13,70 +14,45 @@
         <button class="reset-button">RESET</button>
         <p>Allowed JPG, GIF or PNG. Max size of 800K</p>
     </div>
-    <form class="details-form">
+    <form class="details-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <div class="input-group">
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first-name" value="john">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom"  formControlName="nom" >
             </div>
             <div class="input-group">
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" value="Doe">
+                <label for="last-name">Prenom</label>
+                <input type="text" id="prenom"  formControlName="prenom">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" value="johnDoe@example.com">
+                <input type="email" id="email"  formControlName="email">
             </div>
             <div class="input-group">
-                <label for="organization">Organization</label>
-                <input type="text" id="organization" name="organization" value="ThemeSelection">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" value="+1 (917) 543-9876">
-            </div>
-            <div class="input-group">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" value="123 Main St, New York, NY 10001">
+                <label for="formattedDateNaiss">Date de Naissance</label>
+                <input type="date" id="formattedDateNaiss" formControlName="formattedDateNaiss">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" value="New York">
+                <label for="phone">Lieu de Naissance</label>
+                <select id="lieuNaissance"  name="lieuNaiss" formControlName="lieuNaiss">
+                    <option *ngFor="let lieu of lieuNaissanceOptions" [value]="lieu">{{ lieu }}</option>
+                  </select>
             </div>
             <div class="input-group">
-                <label for="zip-code">Zip Code</label>
-                <input type="text" id="zip-code" name="zip-code" value="10001">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" value="USA">
-            </div>
-            <div class="input-group">
-                <label for="language">Language</label>
-                <input type="text" id="language" name="language" value="English">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="timezone">Timezone</label>
-                <input type="text" id="timezone" name="timezone" value="(GMT-11:00) International Date Line West">
-            </div>
-            <div class="input-group">
-                <label for="currency">Currency</label>
-                <input type="text" id="currency" name="currency" value="USD">
+                <label for="address">Sexe</label>
+                <select id="sexe"  name="sexe" formControlName="sexe">
+                    <option *ngFor="let sexe of sexeOptions" [value]="sexe">{{ sexe }}</option>
+                  </select>
             </div>
         </div>
         <div class="form-actions">
             <button type="submit" class="save-button">SAVE CHANGES</button>
-            <button type="reset" class="reset-button">RESET</button>
+            <button type="reset" class="reset-button" (click)="resetForm()">RESET</button>
         </div>
     </form>
+</div>
 </div>

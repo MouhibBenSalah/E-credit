@@ -1,0 +1,39 @@
+<app-admin-sidebar></app-admin-sidebar>
+<app-admin-navbar></app-admin-navbar>
+<div class="table-container">
+    <table class="authors-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Sexe</th>
+          <th>Age</th>
+          <th>Salaire</th>
+          <th>Status</th>
+          <th>Comptes <br> Bancaires</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let author of authors">
+          <td>
+            <div class="author-info">
+              <img [src]="author.image" alt="Author Image" class="author-img" />
+              <div class="author-details">
+                <div class="author-name">{{ author.name }}</div>
+                <div class="author-email">{{ author.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td>{{ author.sexe }}</td>
+          <td>{{ author.age }}</td>
+          <td>{{ author.salaire}}</td>
+          <td>
+            <span class="status" [ngClass]="{'online': author.status === 'RISQUE', 'NON_RISQUE': author.status === 'NORISK'}">{{ author.status }}</span>
+          </td>
+       
+          <td>{{ author.employed }}</td>
+          <td><button class="edit-button"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

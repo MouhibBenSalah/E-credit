@@ -32,7 +32,6 @@ public class FileStorageService {
             throw new IllegalArgumentException("File is empty. Please provide a valid file.");
         }
 
-        // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {

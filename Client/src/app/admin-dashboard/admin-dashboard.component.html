@@ -3,53 +3,60 @@
 <app-admin-navbar></app-admin-navbar>
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Main Section -->
       <section class="content">
-        <!-- Overview Cards -->
-         <div class="card-overview">
-        <div class="card">
-          <div class="card-content">
-            <h4>NOMBRE TOTAL CLIENTS</h4>
-            <h2>200</h2>
+        <div class="card-overview">
+          <div class="card visitors">
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="details">
+              <p>Clients</p>
+              <h3>1,294</h3>
+            </div>
           </div>
-          <div class="card-icon money-icon"><i class="fa-solid fa-user"></i></div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            <h4>NOMBRE TOTAL DEMANDES CREDIT</h4>
-            <h2>300</h2>
+          <div class="card subscribers">
+            <div class="icon">
+              <i class="fas fa-user-check"></i>
+            </div>
+            <div class="details">
+              <p>Demandes Crédit</p>
+              <h3>1,303</h3>
+            </div>
           </div>
-          <div class="card-icon users-icon"><i class="fa-solid fa-landmark"></i></div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            <h4>NEW CLIENTS</h4>
-            <h2>+3,462</h2>
+          <div class="card sales">
+            <div class="icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+              <p>Sales</p>
+              <h3>$1,345</h3>
+            </div>
           </div>
-          <div class="card-icon clients-icon"><i class="fa-solid fa-user-plus"></i></div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            <h4>SALES</h4>
-            <h2>$103,430</h2>
+          <div class="card orders">
+            <div class="icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="details">
+              <p>Order</p>
+              <h3>576</h3>
+            </div>
           </div>
-          <div class="card-icon sales-icon"><i class="fa-solid fa-user-plus"></i></div>
         </div>
-      </div>
   
-        <!-- Recent Activity -->
+        <!-- table demandes en cours -->
         <div class="container">
-            <h2>Les Demandes Credit</h2>
+            <h2>Les Demandes Crédit En Cours</h2>
           <div class="table-container">  
             <table>
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>numero</th>
                         <th>Customer</th>
-                        <th>Location</th>
-                        <th>Order Date</th>
-                        <th>Status</th>
-                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Unite</th>
+                        <th>Montant</th>
+                        <th>Duree</th>
+                        <th class="action">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,10 +66,12 @@
                             <img [src]="order.customerImage" alt="{{ order.customerName }}">
                             {{ order.customerName }}
                         </td>
-                        <td>{{ order.location }}</td>
-                        <td>{{ order.orderDate }}</td>
-                        <td><span class="status" [ngClass]="order.status | lowercase">{{ order.status }}</span></td>
-                        <td>{{ order.amount | currency }}</td>
+                        <td>{{ order.type }}</td>
+                        <td>{{ order.unite }}</td>
+                        <td>{{ order.duree }}</td>
+                        <td>{{ order.montant }}</td>
+                        <td class="action"><a><i class="fa-solid fa-check"></i></a>  |  <a><i class="fa-solid fa-xmark"></i></a></td>
+    
                     </tr>
                 </tbody>
             </table>
@@ -72,8 +81,37 @@
         <!-- Charts Section -->
         <div class="charts-section">
           <div class="chart">
-            <h2>Sales Overview</h2>
-            <canvas id="sales-chart"></canvas>
+            <h2>Demandes Crédit Récentes</h2>
+            <div class="table-container haha">  
+              <table>
+                  <thead>
+                      <tr>
+                          <th>numero</th>
+                          <th>Customer</th>
+                          <th>Type</th>
+                          <th>Unite</th>
+                          <th>Montant</th>
+                          <th>Duree</th>
+                          <th class="action">Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let order of orders">
+                          <td>{{ order.id }}</td>
+                          <td class="user">
+                              <img [src]="order.customerImage" alt="{{ order.customerName }}">
+                              {{ order.customerName }}
+                          </td>
+                          <td>{{ order.type }}</td>
+                          <td>{{ order.unite }}</td>
+                          <td>{{ order.duree }}</td>
+                          <td>{{ order.montant }}</td>
+                          <td><span class="status" [ngClass]="order.status | lowercase">{{ order.status }}</span></td>
+      
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
           </div>
           <div class="chart">
             <h2>Traffic Sources</h2>

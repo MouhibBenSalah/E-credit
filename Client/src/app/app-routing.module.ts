@@ -11,6 +11,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { adminGuard } from './services/admin.guard';
 import { FormulaireDemandeCreditComponent } from './formulaire-demande-credit/formulaire-demande-credit.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
+import { ClientTableComponent } from './client-table/client-table.component';
+import { SecurityAdminComponent } from './security-admin/security-admin.component';
 
 const routes: Routes = [
   {
@@ -63,6 +65,18 @@ const routes: Routes = [
     component:ProfilAdminComponent,
     canActivate:[adminGuard],
     title:'Profile Admin'
+  },
+  {
+    path:'clients',
+    component:ClientTableComponent,
+    canActivate:[adminGuard],
+    title:'Les Clients'
+  },
+  {
+    path:'securityAdmin',
+    component:SecurityAdminComponent,
+    canActivate:[adminGuard],
+    title:'Changer Mot de Passe'
   }
 ];
 
