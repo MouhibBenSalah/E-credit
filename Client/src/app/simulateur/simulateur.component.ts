@@ -8,11 +8,10 @@ import { TypeCredit, TypeUnite } from '../Enum/enums';
 })
 export class SimulateurComponent {
   
-  typeCreditOptions = Object.values(TypeCredit);
   typeUniteOptions = Object.values(TypeUnite);
   loanAmount: number = 4000;
   loanTerm: number = 12;
-  monthlyPayment: number = 357;
+  Payment: number = 357;
   selectedCreditType: 'Crédit personnel' | 'Crédit Aménagement' | 'Crédit Auto Neuve' | 'Crédit Auto Occasion' = 'Crédit personnel';
   creditUnit: TypeUnite = TypeUnite.MENSUELLE;
 
@@ -63,7 +62,7 @@ export class SimulateurComponent {
 
   calculatePayment() {
     const interestRate = this.interestRates[this.selectedCreditType];
-    this.monthlyPayment = this.simulateur(this.loanAmount, this.loanTerm, interestRate, this.creditUnit);
-    this.monthlyPayment = parseFloat(this.monthlyPayment.toFixed(2));
+    this.Payment = this.simulateur(this.loanAmount, this.loanTerm, interestRate, this.creditUnit);
+    this.Payment = parseFloat(this.Payment.toFixed(2));
   }
 }
