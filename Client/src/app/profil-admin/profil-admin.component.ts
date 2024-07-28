@@ -19,7 +19,7 @@ export class ProfilAdminComponent {
   userForm: FormGroup;
   currentUser!: User;
   selectedFile!: File;
-  profilePictureUrl: string = '../../assets/images/fcbk.png'; // Initialize with an empty string
+  
 
 
   constructor(
@@ -53,8 +53,7 @@ export class ProfilAdminComponent {
         }
         this.userForm.patchValue(data);
          // Set the profile picture URL after fetching user data
-         this.profilePictureUrl = 'http://localhost:4444/User/profile-picture/' + data.profilePicture;
-         this.currentUser = data;
+        this.currentUser = data;
       },
       error: (err) => {
         console.error('Error fetching user data', err);
@@ -66,9 +65,7 @@ export class ProfilAdminComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
-      const reader = new FileReader();
-      reader.onload = e => this.profilePictureUrl = reader.result as string;
-      reader.readAsDataURL(this.selectedFile);
+      
       // Automatically upload the file after selection
       this.uploadProfilePicture();
     }
@@ -84,7 +81,6 @@ export class ProfilAdminComponent {
       this.authService.uploadProfilePicture(this.currentUser.id, this.selectedFile).subscribe({
         next: (response: string) => {
           console.log('Profile picture uploaded successfully:', response);
-          this.profilePictureUrl = 'http://localhost:4444/User/profile-picture/' + this.selectedFile!.name;
           // Optionally refresh user data to display the new profile picture
           this.getUserData(this.currentUser.id);
         },
