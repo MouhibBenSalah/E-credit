@@ -3,7 +3,7 @@
     <div class="sidebar-header">
         <div class="profile-picture-container">
             <div class="profile-picture">
-                <img [src]="'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture" alt="Profile Picture">
+                <img [src]="currentUser.profilePicture ? 'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture : '../../assets/images/fcbk.png'"alt="Profile Picture">
             </div>
             <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
             <i (click)="triggerFileInputClick()" class="fa-solid fa-camera"></i>

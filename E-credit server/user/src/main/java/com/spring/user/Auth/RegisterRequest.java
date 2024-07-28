@@ -24,5 +24,6 @@ public class RegisterRequest {
     private Set<CompteRequest> comptes;*/
     private String email;
     private String password;
+   // private String profilePicture;
 
 }

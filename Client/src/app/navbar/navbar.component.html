@@ -17,7 +17,7 @@
               <li *ngIf="auth.isLoggedIn() && auth.currentUser()?.role === 'Client' ">
                 <div class="nav-item dropdown">
                   <div class="picon profile">
-                    <img [src]="'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture" alt="user-img">
+                    <img [src]="currentUser.profilePicture ? 'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture : '../../assets/images/fcbk.png'" alt="user-img">
                   </div>
                   <div class="dropdown-menu fade-down m-0">
                     <a routerLink="/profile" class="dropdown-item" routerLinkActive="active">Mon Profil</a>

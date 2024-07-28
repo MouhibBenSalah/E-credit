@@ -9,7 +9,7 @@
 
 <div class="account-details">
     <div class="profile-picture">
-        <img [src]="profilePictureUrl" alt="Profile Picture" class="profile-pic">
+        <img [src]="currentUser.profilePicture ? 'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture : '../../assets/images/fcbk.png'"alt="Profile Picture" class="profile-pic">
     <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
     <button class="upload-button" (click)="triggerFileInputClick()">UPLOAD NEW PHOTO</button>
     <button class="reset-button" (click)="resetForm()">RESET</button>
