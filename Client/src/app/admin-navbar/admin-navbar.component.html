@@ -12,14 +12,14 @@
     
         <div class="dropdown">
             <button class="dropbtn">
-                <img src="../../assets/images/fcbk.png" alt="Profile Picture" class="profile-thumb">
+                <img [src]="'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture" alt="Profile Picture" class="profile-thumb">
                 <span class="status-indicator"></span>
             </button>
             <div class="dropdown-content">
                 <div class="dropdown-header">
-                    <img src="../../assets/images/fcbk.png" alt="Profile Picture" class="profile-thumb">
+                    <img [src]="'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture" alt="Profile Picture" class="profile-thumb">
                     <div>
-                        <p>John Doe</p>
+                        <p>{{ currentUser.nom }} {{ currentUser.prenom }}</p>
                         <p class="role">Admin</p>
                     </div>
                 </div>

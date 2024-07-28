@@ -12,9 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class DemandeCreditDTO {
-    private int id;
+    private Long id;
     private Date dateEntreeRelation;
-    private Integer numDemande;
+    private String numDemande;
     private float montant;
     private Float interet;
     private Integer duree;

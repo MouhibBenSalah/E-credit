@@ -39,7 +39,7 @@ public class JwtService {
 
         claims.put("id", user.getId());
         claims.put("userName", username);
-        claims.put("ProfilePicture", user.getProfilePicture());
+        claims.put("profilePicture", user.getProfilePicture());
         claims.put("role", user.getRole());
         claims.put("nom", user.getNom() + " " + user.getPrenom());
         return  generationToken(claims,username);

@@ -15,7 +15,9 @@
           <tbody>
             <tr *ngFor="let garantie of garanties; let i = index">
               <td><input type="text" [(ngModel)]="garantie.nature" placeholder="Nature"></td>
-              <td><input type="text" [(ngModel)]="garantie.type" placeholder="Type"></td>
+              <td><select id="TypeG" name="typeG" [(ngModel)]="garantie.type">
+                <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+            </select></td>
               <td><input type="text" [(ngModel)]="garantie.valeur" placeholder="Valeur"></td>
               <td><input type="text" [(ngModel)]="garantie.devise" placeholder="Devise"></td>
               <td>

@@ -4,6 +4,7 @@ package com.spring.user.Service;
 import com.spring.user.DTO.UpdateUserDTO;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
+import com.spring.user.Enum.Role;
 import com.spring.user.FullResponse.FullUserResponse;
 import com.spring.user.FullResponse.FullUserResponseForNotif;
 import com.spring.user.Repository.CompteRepository;
@@ -15,7 +16,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +61,7 @@ public class UserService {
         var user = userRepository.findById(id).orElse(
                 User.builder().nom("not found").prenom("not found").build()
         );
-        var demandesCredit= demandeCreditclient.findAllDemandesCreditByUser(id);
+       var demandesCredit= demandeCreditclient.findAllDemandesCreditByUser(id);
         return FullUserResponse.builder()
                 .nom(user.getNom())
                 .prenom(user.getPrenom())
@@ -125,5 +128,27 @@ public class UserService {
         return revenuMensuel + salaire - chargesMensuelles;
     }
 
+   /* public void uploadUserProfileImage(Long userId, MultipartFile file) {
 
+        try {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            user.setProfilePicture(file.getBytes());
+            userRepository.save(user);
+        } catch (IOException e) {
+
+            throw new RuntimeException("Failed to upload image", e);
+        }
+    }*/
+
+    public Integer calculateNbreClients() {
+        List<User> users = userRepository.findAll();
+        int nbreClients = 0;
+        for (User user : users) {
+            if (Role.Client.equals(user.getRole())) {
+                nbreClients++;
+            }
+        }
+        return nbreClients;
+    }
 }

@@ -69,10 +69,19 @@ table th {
 
 .non-preselectionne {
     background-color: #d9534f;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
 }
 
 .en-cours {
-    background-color: #f0ad4e;
+    background-color: #aeadac;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+.accepte {
+    background-color: green;
 }
 
 .action-btn {

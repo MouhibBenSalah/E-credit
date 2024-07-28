@@ -46,5 +46,11 @@ public class DemandeCreditController {
         DemandeCredit createdDemandeCredit = demandeCreditService.addDemandeCredit(idU, demandeCredit);
         return ResponseEntity.ok(createdDemandeCredit);
     }
+    @GetMapping("/nbreDemandes")
+    public ResponseEntity<Integer> getNbreDemandes() {
+        Integer nbreDemandes = demandeCreditService.calculateNbreDemandes();
+        return ResponseEntity.ok(nbreDemandes);
+    }
+
 
 }

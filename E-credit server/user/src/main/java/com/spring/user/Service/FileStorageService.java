@@ -3,16 +3,17 @@ package com.spring.user.Service;
 import java.io.File;
 import com.spring.user.Entity.User;
 import com.spring.user.Repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import java.io.IOException;
-
 
 
 @Service
@@ -20,21 +21,26 @@ public class FileStorageService {
 
     @Value("${upload.directory}") // Read from application.properties
     private String uploadDir;
-    private final UserRepository userRepository;
+
 
     @Autowired
-    public FileStorageService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
 
-    public String uploadImage(MultipartFile file) throws IOException {
+    private static final long MAX_FILE_SIZE = 2 * 1024 * 1024;
+
+
+    public String uploadImage(Long userId,MultipartFile file) throws IOException {
         if (file.isEmpty()) {
             throw new IllegalArgumentException("File is empty. Please provide a valid file.");
+        }
+        if (file.getSize() > MAX_FILE_SIZE) {
+            throw new IllegalArgumentException("File size exceeds the maximum limit of 2 MB.");
         }
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
+
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new IllegalArgumentException("Filename contains invalid path sequence " + fileName);
@@ -47,9 +53,9 @@ public class FileStorageService {
             File destFile = new File(filePath);
             file.transferTo(destFile);
 
-            // Build the user object with the profile picture path
-            User user = new User();
-            user.setProfilePicture(filePath);
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+            user.setProfilePicture(fileName);
 
             // Save the user to the repository
             User savedUser = userRepository.save(user);
@@ -63,4 +69,6 @@ public class FileStorageService {
             throw new IOException("Failed to upload file: " + ex.getMessage(), ex);
         }
     }
+
+
 }

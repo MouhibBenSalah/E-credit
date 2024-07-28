@@ -6,7 +6,7 @@
           <div class="form h-100">
             <div [ngSwitch]="step">
               <app-step-one *ngSwitchCase="1" (nextStep)="nextStep()"></app-step-one>
-              <app-step-two *ngSwitchCase="2" (previousStep)="previousStep()" (nextStep)="nextStep()"></app-step-two>
+              <app-step-two *ngSwitchCase="2" (previousStep)="previousStep()" (nextStep)="nextStep()" (stepTwoData)="onStepTwoData($event)"></app-step-two>
               <app-step-three *ngSwitchCase="3" (previousStep)="previousStep()" (submitForm)="nextStep()"></app-step-three>
               <app-step-four *ngSwitchCase="4" (previousStep)="previousStep()" (submitForm)="submitForm()"></app-step-four>
               
