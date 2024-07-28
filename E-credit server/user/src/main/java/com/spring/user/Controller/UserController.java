@@ -9,29 +9,37 @@ import com.spring.user.Repository.UserRepository;
 import com.spring.user.Service.FileStorageService;
 import com.spring.user.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/User")
 public class UserController {
+    @Value("${upload.directory}") // Read from application.properties
+    private String uploadDir;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FileStorageService fileStorageService;
 
+    private final ResourceLoader resourceLoader;
     private final UserService userService;
 
     @Autowired
-    private FileStorageService fileStorageService;
-  
-    @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ResourceLoader resourceLoader)  {
+        this.resourceLoader = resourceLoader;
         this.userService = userService;
     }
 
@@ -72,15 +80,42 @@ public class UserController {
     public ResponseEntity<FullUserResponseForNotif> getAllUsersWithNotif(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(userService.findUserbyNotif(userId));
     }
-    @PostMapping("/uploadProfilePicture")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+  /*  @PostMapping("/{userId}/UploadPhotoProfil")
+    public ResponseEntity<String> uploadUserProfileImage(
+            @PathVariable Long userId,
+            @RequestParam("file") MultipartFile file) {
+        userService.uploadUserProfileImage(userId, file);
+        return ResponseEntity.ok( "Photo uploaded successfully");
+    }*/
+
+    @PostMapping("/uploadProfilePicture/{userId}")
+    public ResponseEntity<String> uploadImage(@PathVariable ("userId") Long userId ,@RequestParam("file") MultipartFile file) {
         try {
-            String message = fileStorageService.uploadImage(file);
+            String message = fileStorageService.uploadImage(userId,file);
             return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file: " + e.getMessage());
         }
     }
+
+    @GetMapping("/profile-picture/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getProfilePicture(@PathVariable String filename) {
+        try {
+            Path filePath = Paths.get(uploadDir).resolve(filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found " + filename);
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
 
 
     @GetMapping("/current-user")
@@ -96,5 +131,10 @@ public class UserController {
     @PostMapping("/calculateRepaymentCapacity")
     public double calculateRepaymentCapacity(@RequestBody User user) {
         return userService.calculateRepaymentCapacity(user);
+    }
+    @GetMapping("/nbreClients")
+    public ResponseEntity<Integer> getNbreClients() {
+        Integer nbreClients = userService.calculateNbreClients();
+        return ResponseEntity.ok(nbreClients);
     }
 }

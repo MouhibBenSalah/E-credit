@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';  // Import Chart.js
+import { AuthService } from '../services/auth.service';
+import { DemandeCreditService } from '../services/demande-credit.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +9,31 @@ import { Chart } from 'chart.js';  // Import Chart.js
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
-  salesChart: Chart | undefined;
-  trafficChart: Chart | undefined;
+  nbreClients!: number;
+  nbreDemandes! :number;
+  constructor(private authService: AuthService , private demandeCreditService : DemandeCreditService) { }
 
+  ngOnInit(): void {
+    this.authService.getnbreClients().subscribe(
+      (data) => {
+        this.nbreClients = data;
+      },
+      (error) => {
+        console.error('Error fetching client count', error);
+      }
+    );
+    this.demandeCreditService.getnbreDemandes().subscribe(
+      (data) => {
+        this.nbreDemandes = data;
+      },
+      (error) => {
+        console.error('Error fetching demandes count', error);
+      }
+    );
+
+  }
+
+ 
     orders = [
       {
         id: 1,

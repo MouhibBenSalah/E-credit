@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -22,12 +24,26 @@ public class DemandeCreditService {
     private DemandeCreditRepository demandeCreditRepository;
 
     private RestTemplate restTemplate;
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int LENGTH = 10; // Change the length as needed
+
+    public  String generateRandomString() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(LENGTH);
+        for (int i = 0; i < LENGTH; i++) {
+            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+        return sb.toString();
+    }
 
     public List<DemandeCredit> getAllDemandeCredit(){
         return demandeCreditRepository.findAll();
     }
 
     public DemandeCredit createDemandeCredit(DemandeCredit demandeCredit){
+        demandeCredit.setDateEntreeRelation(new Date());
+        demandeCredit.setNumDemande(generateRandomString()); // Set the random string
+
         return demandeCreditRepository.save(demandeCredit);
     }
 
@@ -79,5 +95,14 @@ public class DemandeCreditService {
         // Montant à payer par échéance
         return montantTotal / duree;
     }
+    public Integer calculateNbreDemandes() {
+        List<DemandeCredit> demandesCredit = demandeCreditRepository.findAll();
+        int nbreDemandes = 0;
+        for (DemandeCredit demandeCredit : demandesCredit) {
+                nbreDemandes++;
+        }
+        return nbreDemandes;
+    }
+
 
 }

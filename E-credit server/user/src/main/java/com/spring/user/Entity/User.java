@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -55,7 +56,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private SituationFamiliale sf;
 
-    private String profilePicture = "../../assets/images/man3.jpg";
+
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
     @Column(nullable = false, unique = true)
     private String email;

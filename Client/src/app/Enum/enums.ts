@@ -49,3 +49,22 @@ export enum Role {
     TRIMESTRIELLE = 'TRIMESTRIELLE',
     ANNUELLE='ANNUELLE'
   }
+  export enum TypeG {
+    AssuranceVie ='Assurance Vie',
+    Hypothèque='Hypothèque',
+    Nantissement='Nantissement',
+    CessiondeCréances='Cession de Créances',
+    StockdeMarchandises='Stock de Marchandises'
+  }
+  export enum Devise{
+    
+      euro ='Euro',
+      dollar='Dollar',
+ 
+  }
+  export enum Statut{
+    ACCEPTÉE ='ACCEPTÉE',
+    REFUSÉE = 'REFUSÉE',
+    EN_COURS = 'EN_COURS'
+
+}

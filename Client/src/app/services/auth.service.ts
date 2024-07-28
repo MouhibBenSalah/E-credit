@@ -59,5 +59,14 @@ export class AuthService {
   updateUser(id: number, user: Partial<User>): Observable<User> {
     return this.http.patch<User>(`${this.apiUser}${id}`, user);
   }
+  getnbreClients() : Observable<number> {
+    return this.http.get<number> (`${this.apiUser}nbreClients`)
+  }
+  uploadProfilePicture(userId: number, file: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
   
+    return this.http.post(`${this.apiUser}uploadProfilePicture/${userId}`, formData, { responseType: 'text' });
+  }
+
 }

@@ -1,13 +1,15 @@
 
 <div class="sidebar">
     <div class="sidebar-header">
-        <div class="profile-picture">
-            <img src="../../assets/images/fcbk.png" alt="Profile Picture">
-            <i class="fa-solid fa-camera"></i>
-            
+        <div class="profile-picture-container">
+            <div class="profile-picture">
+                <img [src]="'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture" alt="Profile Picture">
+            </div>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
+            <i (click)="triggerFileInputClick()" class="fa-solid fa-camera"></i>
         </div>
         <div class="profile-info">
-            <p class="profile-name"> {{ currentUser?.nom }} {{ currentUser?.prenom }}</p>
+            <p class="profile-name"> {{ currentUser.nom }} {{ currentUser.prenom }}</p>
         </div>
     
     </div>

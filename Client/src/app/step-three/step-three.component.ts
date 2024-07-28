@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Sexe, TypeCredit, TypeUnite } from '../Enum/enums';
+import { Sexe, TypeCredit, TypeG, TypeUnite } from '../Enum/enums';
 
 @Component({
   selector: 'app-step-three',
@@ -7,6 +7,7 @@ import { Sexe, TypeCredit, TypeUnite } from '../Enum/enums';
   styleUrls: ['./step-three.component.css']
 })
 export class StepThreeComponent {
+  typeOptions = Object.values(TypeG);
   
   garanties = [
     { nature: '', type: '', valeur: '', devise: '' }

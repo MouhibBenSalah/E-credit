@@ -9,10 +9,12 @@
 
 <div class="account-details">
     <div class="profile-picture">
-        <img src="../../assets/images/fcbk.png" alt="Profile Picture" class="profile-pic">
-        <button class="upload-button">UPLOAD NEW PHOTO</button>
-        <button class="reset-button">RESET</button>
-        <p>Allowed JPG, GIF or PNG. Max size of 800K</p>
+        <img [src]="profilePictureUrl" alt="Profile Picture" class="profile-pic">
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
+    <button class="upload-button" (click)="triggerFileInputClick()">UPLOAD NEW PHOTO</button>
+    <button class="reset-button" (click)="resetForm()">RESET</button>
+    <p>Allowed JPG, GIF or PNG. Max size of 800K</p>
+
     </div>
     <form class="details-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="form-group">

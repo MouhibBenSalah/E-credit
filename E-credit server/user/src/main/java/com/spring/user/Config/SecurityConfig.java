@@ -32,7 +32,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/auth/**").permitAll() // Permettre l'accès sans authentification
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/User/profile-picture/**").permitAll()// Permettre l'accès sans authentification
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->

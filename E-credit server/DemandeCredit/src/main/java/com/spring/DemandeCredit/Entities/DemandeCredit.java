@@ -1,9 +1,11 @@
 package com.spring.DemandeCredit.Entities;
 
+import com.spring.DemandeCredit.Enum.Statut;
 import com.spring.DemandeCredit.Enum.TypeCredit;
 import com.spring.DemandeCredit.Enum.TypeUnite;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,13 +16,14 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DemandeCredit {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date dateEntreeRelation;
-    private  Integer numDemande;
+    private  String numDemande;
 
     @Enumerated(EnumType.STRING)
     private TypeCredit typeCredit;
@@ -30,6 +33,8 @@ public class DemandeCredit {
     private float montant;
     private Float interet;
     private Integer duree;
+    @Enumerated(EnumType.STRING)
+    private Statut statut;
 
     @OneToMany(mappedBy = "demandeCredit", cascade = CascadeType.ALL)
     private Set<PieceJointe> pieceJointes;

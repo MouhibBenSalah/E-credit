@@ -15,8 +15,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.auth.isLoggedIn()) {
-      this.currentUser = { imagePath: 'path/to/default/image.png' }; // Replace with actual user details fetching logic
-    }
+      this.currentUser = this.auth.currentUser();    }
   }
 
   toggleMenu() {
