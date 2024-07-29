@@ -4,6 +4,8 @@ import { User } from '../entities/user';
 import { DemandeCreditService } from '../services/demande-credit.service';
 import { AuthService } from '../services/auth.service';
 import { Statut } from '../Enum/enums';
+import { MatDialog } from '@angular/material/dialog';
+import { DemandeDetailsComponent } from '../demande-details/demande-details.component';
 
 @Component({
   selector: 'app-demande-credit',
@@ -13,12 +15,14 @@ import { Statut } from '../Enum/enums';
 export class DemandeCreditComponent {
   demandes: DemandeCredit[] = [];
   currentUser!: User;
-  statutEnum = Statut;
+
 
   constructor(
     private demandeCreditService: DemandeCreditService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private dialogRef : MatDialog)
+   { }
+
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser();
@@ -36,4 +40,11 @@ export class DemandeCreditComponent {
       }
     });
   }
+
+  openDialog(demande: DemandeCredit): void {
+    this.dialogRef.open(DemandeDetailsComponent, {
+      data: demande,
+     
+    });
+}
 }

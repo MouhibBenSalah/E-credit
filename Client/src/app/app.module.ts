@@ -29,6 +29,11 @@ import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { ClientTableComponent } from './client-table/client-table.component';
 import { SecurityAdminComponent } from './security-admin/security-admin.component';
+import { DemandeDetailsComponent } from './demande-details/demande-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { EcheancesDetailsComponent } from './echeances-details/echeances-details.component';
 
 @NgModule({
   declarations: [
@@ -54,14 +59,19 @@ import { SecurityAdminComponent } from './security-admin/security-admin.componen
     ProfilAdminComponent,
     AdminNavbarComponent,
     ClientTableComponent,
-    SecurityAdminComponent
+    SecurityAdminComponent,
+    DemandeDetailsComponent,
+    EcheancesDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    
   ],
   providers: [AuthService, {
     provide : HTTP_INTERCEPTORS,
