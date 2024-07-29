@@ -1,9 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Sexe, SituationFamiliale, TypeCredit, TypeUnite } from '../Enum/enums';
-import { User } from '../entities/user';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { DemandeCreditService } from '../services/demande-credit.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TypeCredit, TypeUnite } from '../Enum/enums';
 import { DemandeCredit } from '../entities/DemandeCredit';
 
 @Component({
@@ -12,26 +8,31 @@ import { DemandeCredit } from '../entities/DemandeCredit';
   styleUrls: ['./step-two.component.css']
 })
 export class StepTwoComponent {
-  
+  @Input() demandeCredit!: DemandeCredit;
+  @Output() previousStep = new EventEmitter<void>();
+  @Output() nextStep = new EventEmitter<void>();
+  @Output() updateData = new EventEmitter<Partial<DemandeCredit>>();
+
   typeCreditOptions = Object.values(TypeCredit);
   typeUniteOptions = Object.values(TypeUnite);
 
-   @Output() stepTwoData = new EventEmitter<any>();
-
-  typeCredit: any;
-  unite: any;
-  montant: any;
-  duree: any;
-  interet: any;
-
-  // Call this method when you want to emit the data
-  emitData() {
-    this.stepTwoData.emit({
-      typeCredit: this.typeCredit,
-      unite: this.unite,
-      montant: this.montant,
-      duree: this.duree,
-      interet: this.interet
-    });
+  updateTypeCredit(event: any) {
+    this.updateData.emit({ typeCredit: event.target.value });
   }
+
+  updateTypeUnite(event: any) {
+    this.updateData.emit({ unite: event.target.value });
+  }
+
+  updateMontant(event: any) {
+    this.updateData.emit({ montant: +event.target.value }); 
+  }
+
+  updateDuree(event: any) {
+    this.updateData.emit({ duree: +event.target.value }); }
+
+  updateInteret(event: any) {
+    this.updateData.emit({ interet: +event.target.value }); 
+  }
+  
 }

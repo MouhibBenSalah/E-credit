@@ -1,32 +1,36 @@
 <div class="form h-100">
-    <h3>Garanties Proposées</h3>
-    <div class="garanties-container">
-        <h3>Garanties proposées</h3>
-        <table class="garanties-table">
-          <thead>
-            <tr>
-              <th>Nature</th>
-              <th>Type</th>
-              <th>Valeur</th>
-              <th>Devise</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let garantie of garanties; let i = index">
-              <td><input type="text" [(ngModel)]="garantie.nature" placeholder="Nature"></td>
-              <td><select id="TypeG" name="typeG" [(ngModel)]="garantie.type">
-                <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
-            </select></td>
-              <td><input type="text" [(ngModel)]="garantie.valeur" placeholder="Valeur"></td>
-              <td><input type="text" [(ngModel)]="garantie.devise" placeholder="Devise"></td>
-              <td>
-                <button (click)="deleteGarantie(i)">🗑️</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="add-garantie-btn" (click)="addGarantie()">➕ Ajouter une garantie</button>
-      </div>
-      
+  <h3>Garanties Proposées</h3>
+  <div class="garanties-container">
+    <table class="garanties-table">
+      <thead>
+        <tr>
+          <th>Nature</th>
+          <th>Type</th>
+          <th>Valeur</th>
+          <th>Devise</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let garantie of garanties; let i = index">
+          <td><input type="text" [(ngModel)]="garantie.nature" (ngModelChange)="onGarantieChange()" placeholder="Nature"></td>
+          <td>
+            <select id="TypeG" name="typeG" [(ngModel)]="garantie.typeGarantie" (ngModelChange)="onGarantieChange()">
+              <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+            </select>
+          </td>
+          <td><input type="number" [(ngModel)]="garantie.valeur" (ngModelChange)="onGarantieChange()" placeholder="Valeur"></td>
+          <td>
+            <select id="Devise" name="Devise" [(ngModel)]="garantie.devise" (ngModelChange)="onGarantieChange()">
+              <option *ngFor="let d of deviseOptions" [value]="d">{{ d }}</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="deleteGarantie(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-garantie-btn" (click)="addGarantie()">➕ Ajouter une garantie</button>
+  </div>
 </div>

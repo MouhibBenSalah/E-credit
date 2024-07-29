@@ -38,6 +38,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getAllClients() {
+        return  userRepository.findByRole(Role.Client);
+    }
     public User createUser(User user){
         return userRepository.save(user);
     }

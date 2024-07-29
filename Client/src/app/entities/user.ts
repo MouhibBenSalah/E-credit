@@ -1,4 +1,4 @@
-import { LieuNaissance, Role, Sexe, SituationFamiliale } from "../Enum/enums";
+import { LieuNaissance, Role, Sexe, SituationFamiliale, TypeRisque } from "../Enum/enums";
 import { Compte } from "./compte";
 
 export interface User {
@@ -15,5 +15,8 @@ export interface User {
     profilePicture: string;
     email: string;
     password: string;
+    age: number;
+    typeRisque: TypeRisque;
+    salaire: number;
     comptes: Compte[];
   }

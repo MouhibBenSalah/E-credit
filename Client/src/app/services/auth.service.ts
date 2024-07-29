@@ -68,5 +68,8 @@ export class AuthService {
   
     return this.http.post(`${this.apiUser}uploadProfilePicture/${userId}`, formData, { responseType: 'text' });
   }
+  getAllClients(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUser}clients`);
+  }
 
 }

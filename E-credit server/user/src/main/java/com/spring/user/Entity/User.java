@@ -76,6 +76,9 @@ public class User implements UserDetails {
     @Transient
     private Integer age;
 
+    @Enumerated(EnumType.STRING)
+    private TypeRisque typeRisque;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("user")
     private Set<Compte> comptes;
