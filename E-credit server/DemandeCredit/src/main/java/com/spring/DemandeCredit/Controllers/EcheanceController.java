@@ -3,10 +3,13 @@ package com.spring.DemandeCredit.Controllers;
 import com.spring.DemandeCredit.Entities.Echeance;
 import com.spring.DemandeCredit.Services.EcheanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequestMapping("/echeances")
 @RestController
@@ -38,6 +41,15 @@ public class EcheanceController {
     @GetMapping
     public List<Echeance> getAllEcheances() {
         return echeanceService.getAllEcheances();
+    }
+    @PostMapping("/generateEcheances")
+    public ResponseEntity<List<Echeance>> generateEcheances(
+            @RequestParam float montant,
+            @RequestParam int duree,
+            @RequestParam String typeCredit) {
+
+        List<Echeance> echeances = new ArrayList<>(echeanceService.genererEcheances(montant, duree, typeCredit));
+        return ResponseEntity.ok(echeances);
     }
 
 }

@@ -1,0 +1,63 @@
+<!-- Dialog and Backdrop -->
+<div *ngIf="isDialogOpen" class="dialog-backdrop" (click)="closeDialog()"></div>
+<div *ngIf="isDialogOpen" class="dialog-content">
+  <h2>Détails de la Demande de Crédit</h2>
+  <p><strong>Numéro Demande:</strong> {{ data.numDemande }}</p>
+  <p><strong>Type Demande:</strong> {{ data.typeCredit }}</p>
+  <p><strong>Montant:</strong> {{ data.montant }} DT</p>
+  <p><strong>Date:</strong> {{ data.dateEntreeRelation | date }}</p>
+  <p><strong>Statut:</strong> {{ data.statut }}</p>
+  <p><strong>Duree:</strong> {{ data.duree }}</p>
+  <p><strong>Type Unite:</strong> {{ data.unite }}</p>
+
+  <div *ngIf="data.garanties && data.garanties.length > 0">
+    <h3>Garanties</h3>
+    <ul>
+      <li *ngFor="let garantie of data.garanties">
+        <p><strong>Nature:</strong> {{ garantie.nature }}</p>
+        <p><strong>Type:</strong> {{ garantie.typeGarantie }}</p>
+        <p><strong>Valeur:</strong> {{ garantie.valeur }} {{ garantie.devise }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="data.statut === 'ACCEPTÉE'" class="action-buttons">
+    <button class="action-btn" (click)="viewEcheancier()">
+      <i class="fas fa-calendar-check"></i> Voir Échéancier
+    </button>
+    <button class="action-btn">
+      <i class="fas fa-file-download"></i> Télécharger Contrat
+    </button>
+  </div>
+  
+  <!--
+  <div *ngIf="showEcheances && echeances.length > 0">
+    <h3>Échéancier</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Date Paiement</th>
+          <th>Mensualité (DT)</th>
+          <th>Intérêts Payés (DT)</th>
+          <th>Capital Remboursé (DT)</th>
+          <th>Capital Restant Due (DT)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let echeance of echeances">
+          <td>{{ echeance.datePaiement | date }}</td>
+          <td>{{ echeance.mensualite }}</td>
+          <td>{{ echeance.interetsPayes }}</td>
+          <td>{{ echeance.capitalRembourse }}</td>
+          <td>{{ echeance.capitalRestantDu }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+-->
+
+
+  <button class="close-button" (click)="closeDialog()">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
