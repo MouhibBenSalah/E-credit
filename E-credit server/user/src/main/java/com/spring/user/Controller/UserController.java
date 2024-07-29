@@ -43,9 +43,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     private List<User> getUser() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/clients")
+    public List<User> getAllClients() {
+        return userService.getAllClients();
     }
 
     @GetMapping("/cin/{cin}")

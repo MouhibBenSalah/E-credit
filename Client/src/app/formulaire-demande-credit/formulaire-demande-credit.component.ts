@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { Sexe, SituationFamiliale } from '../Enum/enums';
-import { DemandeCreditService } from '../services/demande-credit.service';
+import { Component } from '@angular/core';
+import { Sexe, SituationFamiliale, Statut, TypeCredit, TypeUnite } from '../Enum/enums';
 import { DemandeCredit } from '../entities/DemandeCredit';
+import { DemandeCreditService } from '../services/demande-credit.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../entities/user';
+import { Garantie } from '../entities/DTO/GarantieDTO';
 
 @Component({
   selector: 'app-formulaire-demande-credit',
   templateUrl: './formulaire-demande-credit.component.html',
   styleUrls: ['./formulaire-demande-credit.component.css']
 })
-export class FormulaireDemandeCreditComponent implements OnInit{
+export class FormulaireDemandeCreditComponent {
 
   sexeOptions = Object.values(Sexe);
   situationFamilialeOptions = Object.values(SituationFamiliale);
   step = 1;
-  currentUser!: User;
-
+  currentUser! :User
   demandeCredit: DemandeCredit = {
     id: 0,
     dateEntreeRelation: new Date(),
     numDemande: '',
-    typeCredit: '' as any, // Provide a default value or cast to any
-    unite: '' as any, // Provide a default value or cast to any
-    montant: 0, // Provide a default value
-    interet: 0, // Provide a default value
-    duree: 0, // Provide a default value
-    statut :'' as any ,
+    typeCredit: TypeCredit.Amenagement,  
+    statut: Statut.EN_COURS,  
+    unite: TypeUnite.MENSUELLE,  
+    montant: 0,
+    interet: 0,
+    duree: 0,
     pieceJointes: [],
     garanties: [],
-    userId: 0 // Provide a default value
+    userId: 0 
   };
 
-  constructor(
-    private demandeCreditService: DemandeCreditService,
-    private authService: AuthService
-  ) {}
+  constructor(private demandeCreditService: DemandeCreditService , private authService :AuthService){}
 
-  ngOnInit() {
-    this.currentUser = this.authService.currentUser();
-    this.demandeCredit.userId = this.currentUser.id;
+
+  ngOnInit(): void {
+  
+      this.currentUser = this.authService.currentUser();    
+      this.demandeCredit.userId = this.currentUser.id;
+    
   }
 
   nextStep() {
@@ -50,26 +50,17 @@ export class FormulaireDemandeCreditComponent implements OnInit{
     this.step--;
   }
 
-  onStepTwoData(data: any) {
-    this.demandeCredit.typeCredit = data.typeCredit;
-    this.demandeCredit.unite = data.unite;
-    this.demandeCredit.montant = data.montant;
-    this.demandeCredit.duree = data.duree;
-    this.demandeCredit.interet = data.interet;
-  }
-
-  onStepThreeData(data: any) {
-    this.demandeCredit.garanties = data.garanties;
-  }
-
   submitForm() {
-    this.demandeCreditService.createDemandeCredit(this.demandeCredit).subscribe(
-      response => {
-        console.log('Demande created successfully', response);
-      },
-      error => {
-        console.error('Error creating demande', error);
-      }
-    );
+    console.log('Form submitted!', this.demandeCredit);
+    this.demandeCreditService.createDemandeCredit(this.demandeCredit).subscribe(response => {
+      console.log('Form submission response:', response);
+    });
+  }
+    updateDemandeCredit(data: Partial<DemandeCredit>) {
+    this.demandeCredit = { ...this.demandeCredit, ...data };
+  }
+
+  updateGaranties(garanties: Garantie[]) {
+    this.demandeCredit.garanties = garanties;
   }
 }

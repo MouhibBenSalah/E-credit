@@ -7,7 +7,7 @@ import { DemandeCredit } from '../entities/DemandeCredit';
   providedIn: 'root'
 })
 export class DemandeCreditService {
-  private apiDemande: string = 'http://localhost:4444/DemandesCredit/';
+  private apiDemande: string = 'http://localhost:4444/DemandesCredit';
 
   constructor(private http : HttpClient) {  }
 
@@ -17,10 +17,10 @@ export class DemandeCreditService {
   }
 
   getDemandeByUserId(id: number): Observable<DemandeCredit[]> {
-    return this.http.get<DemandeCredit[]>(`${this.apiDemande}user/${id}`);
+    return this.http.get<DemandeCredit[]>(`${this.apiDemande}/user/${id}`);
   }
   getnbreDemandes() : Observable<number> {
-    return this.http.get<number> (`${this.apiDemande}nbreDemandes`)
+    return this.http.get<number> (`${this.apiDemande}/nbreDemandes`)
   }
 
 }

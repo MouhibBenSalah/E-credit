@@ -1,6 +1,7 @@
 package com.spring.DemandeCredit.Enum;
 
 public enum Devise {
-    euro,
-    dollar,
+    EUR,
+    USD,
+    DT
 }

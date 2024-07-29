@@ -50,16 +50,18 @@ export enum Role {
     ANNUELLE='ANNUELLE'
   }
   export enum TypeG {
-    AssuranceVie ='Assurance Vie',
+    AssuranceVie ='AssuranceVie',
     Hypothèque='Hypothèque',
     Nantissement='Nantissement',
-    CessiondeCréances='Cession de Créances',
-    StockdeMarchandises='Stock de Marchandises'
+    CessiondeCréances='CessiondeCréances',
+    StockdeMarchandises='StockdeMarchandises'
   }
   export enum Devise{
     
-      euro ='Euro',
-      dollar='Dollar',
+      EUR ='EUR',
+      USD='USD',
+      DT='DT'
+      
  
   }
   export enum Statut{
@@ -67,4 +69,8 @@ export enum Role {
     REFUSÉE = 'REFUSÉE',
     EN_COURS = 'EN_COURS'
 
+}
+export enum TypeRisque{
+  RISQUE ='RISQUE',
+  NON_RISQUE = 'NON_RISQUE'
 }
