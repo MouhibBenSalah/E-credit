@@ -71,5 +71,8 @@ export class AuthService {
   getAllClients(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUser}clients`);
   }
+  deleteUser(idU: number): Observable<any> {
+    return this.http.delete(`${this.apiUser}delete/${idU}`, { responseType: 'text' });
+  }
 
 }

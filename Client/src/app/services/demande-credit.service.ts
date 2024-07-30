@@ -32,8 +32,10 @@ export class DemandeCreditService {
       .set('duree', duree.toString())
       .set('typeCredit', typeCredit);
 
-    // Make the HTTP POST request
     return this.http.post<Echeance[]>(`${this.apiEcheance}/generateEcheances`, null, { params });
   }
 
+  getAllDemandesCredit(): Observable<DemandeCredit[]> {
+    return this.http.get<DemandeCredit[]>(`${this.apiDemande}`);
+  }
 }

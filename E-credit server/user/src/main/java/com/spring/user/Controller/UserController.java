@@ -122,7 +122,15 @@ public class UserController {
     }
 
 
-
+    @DeleteMapping("/delete/{idU}")
+    public ResponseEntity<String> deleteUser(@PathVariable("idU") Long idU) {
+        boolean deleted = userService.deleteUser(idU);
+        if (deleted) {
+            return ResponseEntity.ok("User deleted!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with ID " + idU + " does not exist.");
+        }
+    }
     @GetMapping("/current-user")
     public ResponseEntity<User> getCurrentUser(Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();

@@ -1,5 +1,6 @@
 package com.spring.DemandeCredit.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.DemandeCredit.Enum.Statut;
 import com.spring.DemandeCredit.Enum.TypeCredit;
 import com.spring.DemandeCredit.Enum.TypeUnite;
@@ -17,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class DemandeCredit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,7 +45,7 @@ public class DemandeCredit {
     @JoinColumn(name = "dossier_credit_id")
     private DossierCredit dossierCredit;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Garantie> garanties;
 
     private Long userId;

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Chart } from 'chart.js';  // Import Chart.js
 import { AuthService } from '../services/auth.service';
 import { DemandeCreditService } from '../services/demande-credit.service';
+import { DemandeCredit } from '../entities/DemandeCredit';
+import { User } from '../entities/user';
+import { Statut } from '../Enum/enums';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,8 +13,11 @@ import { DemandeCreditService } from '../services/demande-credit.service';
 })
 export class AdminDashboardComponent {
   nbreClients!: number;
-  nbreDemandes! :number;
-  constructor(private authService: AuthService , private demandeCreditService : DemandeCreditService) { }
+  nbreDemandes!: number;
+  demandesEnCours: any[] = [];
+  demandesAccRej: any[] = [];
+
+  constructor(private authService: AuthService, private demandeCreditService: DemandeCreditService) { }
 
   ngOnInit(): void {
     this.authService.getnbreClients().subscribe(
@@ -22,6 +28,7 @@ export class AdminDashboardComponent {
         console.error('Error fetching client count', error);
       }
     );
+
     this.demandeCreditService.getnbreDemandes().subscribe(
       (data) => {
         this.nbreDemandes = data;
@@ -31,82 +38,40 @@ export class AdminDashboardComponent {
       }
     );
 
+    this.loadDemandesEnCours();
+    this.loadDemandesAccRej();
   }
 
- 
-    orders = [
-      {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Acceptée',
-        montant: '128.90 DT'
-      },  {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Rejetée',
-        montant: '128.90 DT'
-      }, {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Acceptée',
-        montant: '128.90 DT'
-      }, {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Rejetée',
-        montant: '128.90 DT'
-      },
-      {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Acceptée',
-        montant: '128.90 DT'
-      },
-      {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Acceptée',
-        montant: '128.90 DT'
-      },
-      {
-        id: 1,
-        customerName: 'Zinzua Chan Lee',
-        customerImage: '../../assets/images/fcbk.png',
-        type: 'Amenagement',
-        unite: 'trimestrielle',
-        duree: '5 ans',
-        status: 'Rejetée',
-        montant: '128.90 DT'
-      },
-    
-    
-      // Add more orders as needed
-    ];
+  loadDemandesEnCours() {
+    this.demandeCreditService.getAllDemandesCredit().subscribe((demandes: DemandeCredit[]) => {
+      demandes.forEach((demande: DemandeCredit) => {
+        if (demande.statut === Statut.EN_COURS) {
+          this.authService.getUserById(demande.userId).subscribe((user: User) => {
+            this.demandesEnCours.push({
+              ...demande,
+              customerImage: user.profilePicture,
+              customerName: `${user.nom} ${user.prenom}`
+            });
+          });
+        }
+      });
+    });
+  }
 
-    // Traffic Sources Chart
+  loadDemandesAccRej() {
+    this.demandeCreditService.getAllDemandesCredit().subscribe((demandes: DemandeCredit[]) => {
+      demandes.forEach((demande: DemandeCredit) => {
+        if (demande.statut === Statut.ACCEPTÉE || demande.statut === Statut.REFUSÉE) {
+          this.authService.getUserById(demande.userId).subscribe((user: User) => {
+            this.demandesAccRej.push({
+              ...demande,
+              customerImage: user.profilePicture,
+              customerName: `${user.nom} ${user.prenom}`
+            });
+          });
+        }
+      });
+    });
+  }
   }
 

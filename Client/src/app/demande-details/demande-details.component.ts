@@ -1,6 +1,5 @@
-import { Component, Inject, Input, Output } from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DemandeCredit } from '../entities/DemandeCredit';
 import { DemandeCreditService } from '../services/demande-credit.service';
 import { Echeance } from '../entities/echeance';
 import { EcheancesDetailsComponent } from '../echeances-details/echeances-details.component';
@@ -15,14 +14,14 @@ export class DemandeDetailsComponent {
   isDialogOpen = true;
   data: any;
   echeances: Echeance[] = [];
-  showEcheances = true; // Flag to control the display of echeances
+  showEcheances = true; 
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: any, // Replace with appropriate type
+    @Inject(MAT_DIALOG_DATA) public dialogData: any, 
     private demandeCreditService: DemandeCreditService,
     private dialogRef: MatDialogRef<DemandeDetailsComponent>,
-    private dialog: MatDialog // Import MatDialog service
+    private dialog: MatDialog 
 
   ) { 
     this.data = dialogData;

@@ -1,10 +1,12 @@
 package com.spring.DemandeCredit.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.DemandeCredit.Enum.Devise;
 import com.spring.DemandeCredit.Enum.TypeG;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
@@ -13,7 +15,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Garantie {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,6 +29,6 @@ public class Garantie {
     @Enumerated(EnumType.STRING)
     private Devise devise;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "garanties")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "garanties", fetch = FetchType.EAGER)
     private Set<DemandeCredit> demandeCredits;
 }
