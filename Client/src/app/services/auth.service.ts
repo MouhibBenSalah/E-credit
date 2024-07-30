@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../entities/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ChangePasswordRequest } from '../entities/ChangePasswordRequest';
 @Injectable({
   providedIn: 'root',
 })
@@ -73,6 +74,9 @@ export class AuthService {
   }
   deleteUser(idU: number): Observable<any> {
     return this.http.delete(`${this.apiUser}delete/${idU}`, { responseType: 'text' });
+  }
+  changePassword(request: ChangePasswordRequest): Observable<any> {
+    return this.http.patch<any>(`${this.apiUser}changePassword`, request);
   }
 
 }

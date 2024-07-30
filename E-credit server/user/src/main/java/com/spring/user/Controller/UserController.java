@@ -1,6 +1,7 @@
 package com.spring.user.Controller;
 
 import com.spring.user.DTO.UpdateUserDTO;
+import com.spring.user.Entity.ChangePasswordRequest;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.FullResponse.FullUserResponse;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -149,5 +151,13 @@ public class UserController {
     public ResponseEntity<Integer> getNbreClients() {
         Integer nbreClients = userService.calculateNbreClients();
         return ResponseEntity.ok(nbreClients);
+    }
+    @PatchMapping("/changePassword")
+    public ResponseEntity<?> changePassword(
+            @RequestBody ChangePasswordRequest request,
+            Principal connectedUser
+    ) {
+        userService.changePassword(request, connectedUser);
+        return ResponseEntity.ok().build();
     }
 }

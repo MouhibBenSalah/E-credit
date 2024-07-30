@@ -172,15 +172,29 @@ td img {
     vertical-align: middle;
 }
 .fa-check {
-    color: green;
+    color: #fff;
     cursor: pointer;
+    background-color: green;
+  padding: 8px;
+  border-radius: 50%;
     
 }
 
 
 .fa-xmark {
-    color: red;
-    cursor: pointer;
+  color: #fff;
+  cursor: pointer;
+  background-color: red;
+  padding: 8px;
+  border-radius: 50%;
+}
+.fa-eye{
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  margin-left: 15px;
+  background-color: #020876;
+  padding: 8px;
+  border-radius: 8px;
 }
 .action .status {
     display: flex;
@@ -189,7 +203,11 @@ td img {
 }
 
 .action a {
-    margin: 0 10px; 
+    margin: 0 3px; 
     text-decoration: none;
    
+}
+.details-btn{
+  border: none;
+ background-color: transparent;
 }

@@ -7,11 +7,11 @@
 </nav>
 <div class="change-password-container">
     <h2>Change Password</h2>
-    <form>
+    <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <div class="input-group">
                 <label for="currentPassword">Current Password</label>
-                <input [type]="passwordFieldType" id="CurrentPassword" formControlName="CurrentPassword">
+                <input [type]="passwordFieldType" id="CurrentPassword" formControlName="currentPassword">
                 <button class="toggle-password" type="button" (click)="togglePasswordVisibility()">
                     <i [ngClass]="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
                   </button> 
@@ -42,8 +42,8 @@
             </ul>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn-save">Save Changes</button>
-            <button type="reset" class="btn-reset">Reset</button>
+            <button type="submit" class="btn-save" [disabled]="passwordForm.invalid">Save Changes</button>
+            <button type="reset" class="btn-reset" (click)="passwordForm.reset()">Reset</button>
         </div>
     </form>
 </div>
