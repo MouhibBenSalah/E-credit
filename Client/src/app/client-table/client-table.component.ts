@@ -25,5 +25,18 @@ export class ClientTableComponent {
       }
     );
   }
+  deleteUser(id: number): void {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.authService.deleteUser(id).subscribe(
+        response => {
+          console.log(response);
+          this.authors = this.authors.filter(author => author.id !== id);
+        },
+        error => {
+          console.error('Error deleting user:', error);
+        }
+      );
+    }
+  }
 
 }

@@ -4,6 +4,7 @@ import com.spring.DemandeCredit.DTO.UserDTO;
 import com.spring.DemandeCredit.Entities.DemandeCredit;
 import com.spring.DemandeCredit.Enum.TypeUnite;
 import com.spring.DemandeCredit.Repositories.DemandeCreditRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;

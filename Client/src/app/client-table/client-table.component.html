@@ -17,7 +17,7 @@
       <tr *ngFor="let author of authors">
         <td>
           <div class="author-info">
-            <img [src]="author.profilePicture" alt="Author Image" class="author-img" />
+            <img [src]="author.profilePicture ? 'http://localhost:4444/User/profile-picture/' + author.profilePicture : '../../assets/images/fcbk.png'" alt="Profile Picture" class="author-img">
             <div class="author-details">
               <div class="author-name">{{ author.nom }} {{ author.prenom }}</div>
               <div class="author-email">{{ author.email }}</div>
@@ -30,8 +30,8 @@
         <td>
           <span class="status" [ngClass]="{'online': author.typeRisque === 'RISQUE', 'NON_RISQUE': author.typeRisque === 'NON_RISQUE'}">{{ author.typeRisque }}</span>
         </td>
-        <td>{{ author.comptes?.length || 0 }} comptes</td> <!-- Assuming comptes is an array -->
-        <td><button class="edit-button"><i class="fa-solid fa-trash"></i></button></td>
+        <td>{{ author.comptes.length || 0 }} comptes</td> 
+        <td><button class="edit-button" (click)="deleteUser(author.id)"><i class="fa-solid fa-trash"></i></button></td>
       </tr>
     </tbody>
   </table>

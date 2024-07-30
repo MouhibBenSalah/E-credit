@@ -50,7 +50,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>numero</th>
+                        <th>Numero</th>
                         <th>Customer</th>
                         <th>Type</th>
                         <th>Unite</th>
@@ -60,19 +60,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let order of orders">
-                        <td>{{ order.id }}</td>
-                        <td>
-                            <img [src]="order.customerImage" alt="{{ order.customerName }}">
-                            {{ order.customerName }}
-                        </td>
-                        <td>{{ order.type }}</td>
-                        <td>{{ order.unite }}</td>
-                        <td>{{ order.duree }}</td>
-                        <td>{{ order.montant }}</td>
-                        <td class="action"><a><i class="fa-solid fa-check"></i></a>  |  <a><i class="fa-solid fa-xmark"></i></a></td>
-    
-                    </tr>
+                  <tr *ngFor="let demande of demandesEnCours" >
+                    <td>{{ demande.numDemande }}</td>
+                    <td>
+                      <img [src]="demande.customerImage ? 'http://localhost:4444/User/profile-picture/' + demande.customerImage : '../../assets/images/fcbk.png'" alt="{{ demande.customerName }}">
+                      {{ demande.customerName }}
+                    </td>
+                    <td>{{ demande.typeCredit }}</td>
+                    <td>{{ demande.unite }}</td>
+                    <td>{{ demande.duree }}</td>
+                    <td>{{ demande.montant }}</td>
+                    <td class="action">
+                      <a><i class="fa-solid fa-check"></i></a> |
+                      <a><i class="fa-solid fa-xmark"></i></a>
+                    </td>
+                  </tr>
                 </tbody>
             </table>
           </div>
@@ -96,19 +98,19 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let order of orders">
-                          <td>{{ order.id }}</td>
+                     <tr *ngFor="let demande of demandesAccRej">
+                          <td>{{ demande.numDemande }}</td>
                           <td class="user">
-                              <img [src]="order.customerImage" alt="{{ order.customerName }}">
-                              {{ order.customerName }}
+                            <img [src]="demande.customerImage ? 'http://localhost:4444/User/profile-picture/' + demande.customerImage : '../../assets/images/fcbk.png'" alt="{{ demande.customerName }}">
+                            {{ demande.customerName }}
                           </td>
-                          <td>{{ order.type }}</td>
-                          <td>{{ order.unite }}</td>
-                          <td>{{ order.duree }}</td>
-                          <td>{{ order.montant }}</td>
-                          <td><span class="status" [ngClass]="order.status | lowercase">{{ order.status }}</span></td>
+                          <td>{{ demande.typeCredit }}</td>
+                          <td>{{ demande.unite }}</td>
+                          <td>{{ demande.duree }}</td>
+                          <td>{{ demande.montant }}</td>
+                          <td><span class="status" [ngClass]="demande.statut | lowercase">{{ demande.statut }}</span></td>
       
-                      </tr>
+                      </tr> 
                   </tbody>
               </table>
             </div>

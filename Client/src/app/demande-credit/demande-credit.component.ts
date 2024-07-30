@@ -3,7 +3,6 @@ import { DemandeCredit } from '../entities/DemandeCredit';
 import { User } from '../entities/user';
 import { DemandeCreditService } from '../services/demande-credit.service';
 import { AuthService } from '../services/auth.service';
-import { Statut } from '../Enum/enums';
 import { MatDialog } from '@angular/material/dialog';
 import { DemandeDetailsComponent } from '../demande-details/demande-details.component';
 

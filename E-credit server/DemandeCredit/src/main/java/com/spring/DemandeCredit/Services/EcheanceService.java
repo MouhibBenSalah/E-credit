@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +39,7 @@ public class EcheanceService {
         return echeanceRepoistory.findAll();
     }
 
-    public Set<Echeance> genererEcheances(float montant, int duree, String typeCredit) {
+    public List<Echeance> genererEcheances(float montant, int duree, String typeCredit) {
         // Map typeCredit to interet
         float interet;
         switch (typeCredit) {
@@ -94,6 +91,11 @@ public class EcheanceService {
             calendar.add(Calendar.MONTH, 1);
         }
 
-        return nouvellesEcheances;
+        // Convert to list and sort by datePaiement
+        List<Echeance> sortedEcheances = new ArrayList<>(nouvellesEcheances);
+        sortedEcheances.sort(Comparator.comparing(Echeance::getDatePaiement));
+
+        return sortedEcheances;
     }
 }
+

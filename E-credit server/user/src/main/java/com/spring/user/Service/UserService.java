@@ -60,6 +60,15 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public Boolean deleteUser(Long idU) {
+        Optional<User> UserOptional = userRepository.findById(idU);
+        if (UserOptional.isPresent()) {
+            userRepository.deleteById(idU);
+            return true; // La suppression a été effectuée avec succès
+        } else {
+            return false; // L'identifiant spécifié n'existe pas
+        }
+    }
     public FullUserResponse findUserbyDemandeCredit(Long id) {
         var user = userRepository.findById(id).orElse(
                 User.builder().nom("not found").prenom("not found").build()
@@ -131,18 +140,6 @@ public class UserService {
         return revenuMensuel + salaire - chargesMensuelles;
     }
 
-   /* public void uploadUserProfileImage(Long userId, MultipartFile file) {
-
-        try {
-            User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-            user.setProfilePicture(file.getBytes());
-            userRepository.save(user);
-        } catch (IOException e) {
-
-            throw new RuntimeException("Failed to upload image", e);
-        }
-    }*/
 
     public Integer calculateNbreClients() {
         List<User> users = userRepository.findAll();
