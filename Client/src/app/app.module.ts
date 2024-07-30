@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { EcheancesDetailsComponent } from './echeances-details/echeances-details.component';
+import { DetailDemandeEnCoursComponent } from './detail-demande-en-cours/detail-demande-en-cours.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { EcheancesDetailsComponent } from './echeances-details/echeances-details
     ClientTableComponent,
     SecurityAdminComponent,
     DemandeDetailsComponent,
-    EcheancesDetailsComponent
+    EcheancesDetailsComponent,
+    DetailDemandeEnCoursComponent
   ],
   imports: [
     BrowserModule,

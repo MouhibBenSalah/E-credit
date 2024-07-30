@@ -5,6 +5,8 @@ import { DemandeCreditService } from '../services/demande-credit.service';
 import { DemandeCredit } from '../entities/DemandeCredit';
 import { User } from '../entities/user';
 import { Statut } from '../Enum/enums';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailDemandeEnCoursComponent } from '../detail-demande-en-cours/detail-demande-en-cours.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,7 +19,7 @@ export class AdminDashboardComponent {
   demandesEnCours: any[] = [];
   demandesAccRej: any[] = [];
 
-  constructor(private authService: AuthService, private demandeCreditService: DemandeCreditService) { }
+  constructor(private authService: AuthService, private demandeCreditService: DemandeCreditService, private dialogRef : MatDialog) { }
 
   ngOnInit(): void {
     this.authService.getnbreClients().subscribe(
@@ -73,5 +75,10 @@ export class AdminDashboardComponent {
       });
     });
   }
+  openDialog(demande: DemandeCredit): void {
+    this.dialogRef.open(DetailDemandeEnCoursComponent, {
+      data: demande,
+     
+    });
   }
-
+}

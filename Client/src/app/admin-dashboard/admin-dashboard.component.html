@@ -56,6 +56,7 @@
                         <th>Unite</th>
                         <th>Montant</th>
                         <th>Duree</th>
+                        <th>Details</th>
                         <th class="action">Action</th>
                     </tr>
                 </thead>
@@ -70,8 +71,9 @@
                     <td>{{ demande.unite }}</td>
                     <td>{{ demande.duree }}</td>
                     <td>{{ demande.montant }}</td>
+                    <td><button class="details-btn" (click)="openDialog(demande)"><i class="fa-solid fa-eye"></i></button></td>
                     <td class="action">
-                      <a><i class="fa-solid fa-check"></i></a> |
+                      <a><i class="fa-solid fa-check"></i></a>
                       <a><i class="fa-solid fa-xmark"></i></a>
                     </td>
                   </tr>
