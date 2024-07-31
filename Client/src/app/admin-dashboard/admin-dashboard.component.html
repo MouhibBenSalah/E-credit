@@ -69,8 +69,8 @@
                     </td>
                     <td>{{ demande.typeCredit }}</td>
                     <td>{{ demande.unite }}</td>
-                    <td>{{ demande.duree }}</td>
                     <td>{{ demande.montant }}</td>
+                    <td>{{ demande.duree }}</td>
                     <td><button class="details-btn" (click)="openDialog(demande)"><i class="fa-solid fa-eye"></i></button></td>
                     <td class="action">
                       <a><i class="fa-solid fa-check"></i></a>
@@ -108,8 +108,8 @@
                           </td>
                           <td>{{ demande.typeCredit }}</td>
                           <td>{{ demande.unite }}</td>
-                          <td>{{ demande.duree }}</td>
                           <td>{{ demande.montant }}</td>
+                          <td>{{ demande.duree }}</td>
                           <td><span class="status" [ngClass]="demande.statut | lowercase">{{ demande.statut }}</span></td>
       
                       </tr> 

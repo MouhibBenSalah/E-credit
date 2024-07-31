@@ -74,3 +74,13 @@ export enum TypeRisque{
   RISQUE ='RISQUE',
   NON_RISQUE = 'NON_RISQUE'
 }
+export enum TypeCompte{
+  PROFESSIONNEL ='PROFESSIONNEL',
+  COURANT = 'COURANT',
+  EPARGNE = 'EPARGNE',
+  BLOQUE ='BLOQUE'
+}
+export enum EtatCompte{
+  POSITIF ='POSITIF',
+  NEGATIF = 'NEGATIF'
+}
