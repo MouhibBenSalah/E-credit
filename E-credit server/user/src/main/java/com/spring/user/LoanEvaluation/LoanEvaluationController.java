@@ -19,7 +19,17 @@ public class LoanEvaluationController {
         double score = loanEvaluationService.calculateScore(request.getUser());
         return ResponseEntity.ok(score);
     }
+/* @PostMapping("/calculateScore")
+    public ResponseEntity<Double> calculateScore(@RequestBody UserDTO userDto) {
+        User user = UserMapper.convertToEntity(userDto);
 
+        // Calculate the score
+        double score = loanEvaluationService.calculateScore(user);
+
+        return ResponseEntity.ok(score);
+
+    }
+*/
     @PostMapping("/evaluate")
     public ResponseEntity<String> evaluateRisk(@RequestBody LoanEvaluationRequest request ) {
 

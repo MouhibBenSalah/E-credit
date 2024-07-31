@@ -66,9 +66,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    private Double revenuMensuel;
-    private Double chargesMensuelles;
-    private Double salaire;
+    private float revenuMensuel;
+    private float chargesMensuelles;
+    private float salaire;
 
     @Enumerated(EnumType.STRING)
     private EmploymentType employmentType;

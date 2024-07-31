@@ -1,0 +1,3 @@
+interface DemandeCreditDTO {
+    montant: number;
+  }

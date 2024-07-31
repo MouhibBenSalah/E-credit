@@ -1,6 +1,7 @@
 package com.spring.DemandeCredit.Controllers;
 
 import com.spring.DemandeCredit.Entities.DemandeCredit;
+import com.spring.DemandeCredit.Enum.Statut;
 import com.spring.DemandeCredit.Enum.TypeUnite;
 import com.spring.DemandeCredit.Services.DemandeCreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/DemandesCredit")
@@ -52,5 +54,10 @@ public class DemandeCreditController {
         return ResponseEntity.ok(nbreDemandes);
     }
 
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<DemandeCredit> updateStatus(@PathVariable Long id, @RequestBody Map<String, String> status) {
+        DemandeCredit updatedDemandeCredit = demandeCreditService.updateStatus(id, Statut.valueOf(status.get("statut")));
+        return ResponseEntity.ok(updatedDemandeCredit);
+    }
 
 }

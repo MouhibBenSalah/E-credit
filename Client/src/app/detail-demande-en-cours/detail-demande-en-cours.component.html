@@ -32,6 +32,8 @@
     <p><strong>Revenu Mensuel:</strong> {{ client.revenuMensuel }} DT</p>
     <p><strong>Salaire:</strong> {{ client.salaire }} DT</p>
     <p><strong>Charges Mensuelles:</strong> {{ client.chargesMensuelles }} DT</p>
+    <p><strong>Type d'employement:</strong> {{ client.employmentType }}</p>
+
     <p><strong>Age:</strong> {{ client.age }}</p>
   </div>
   <div class="account-info">
@@ -49,15 +51,29 @@
       </li>
     </ul>
   </div>
-
   <div class="deux">
-    <button class="done score-btn">
+    <button class="done score-btn" (click)="calculateScore()">
       <i class="fas fa-calculator"></i> Calculer le score
     </button>
-    <button class="done risk-btn">
+    <button class="done risk-btn" (click)="evaluateRisk()">
       <i class="fas fa-shield-alt"></i> Evaluer le risque
     </button>
   </div>
+  <div *ngIf="riskScore !== null" class="result score">
+    <i class="fas fa-star"></i>
+    <p><strong>Score de Client:</strong> {{ riskScore }}</p>
+  </div>
+  <div *ngIf="riskLevel !== null" class="result {{ riskLevel }}">
+    <p><strong>Niveau de Risque:</strong> {{ riskLevel }}</p>
+  </div>
+
+  <div *ngIf="statusMessage" class="status-message">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>{{ statusMessage }}</p>
+  </div>
+
+  
+
   <button class="close-button" (click)="closeDialog()">
     <i class="fas fa-times"></i>
   </button>

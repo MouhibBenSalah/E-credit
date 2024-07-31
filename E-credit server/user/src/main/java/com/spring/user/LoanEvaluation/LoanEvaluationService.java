@@ -1,6 +1,7 @@
 package com.spring.user.LoanEvaluation;
 
 import com.spring.user.DTO.DemandeCreditDTO;
+import com.spring.user.DTO.UserDTO;
 import com.spring.user.Entity.Compte;
 import com.spring.user.Entity.User;
 import com.spring.user.Enum.EmploymentType;

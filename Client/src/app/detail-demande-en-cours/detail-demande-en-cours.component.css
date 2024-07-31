@@ -155,7 +155,7 @@
     }
   }
   .done{
-    display: inline-flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: 'Roboto', sans-serif;
@@ -167,6 +167,7 @@
   transition: background-color 0.3s, transform 0.2s;
   outline: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
   }
   .score-btn {
     background: #007bff;
@@ -182,7 +183,6 @@
     font-size: 1.2em;
   }
   
-  /* Risk Button Styles */
   .risk-btn {
     background: #28a745;
     color: #fff;
@@ -199,4 +199,154 @@
   .deux{
     display: flex;
     gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    
   }
+  .Faible {
+    background-color: #bffdc1 !important; 
+  }
+  
+  .Modéré {
+    background-color: #ff9800 !important; 
+  }
+  
+  .Élevé {
+    background-color: #f44336 !important;
+  }
+  
+  .Faible::before {
+    content: '✅'; 
+    display: block;
+    font-size: 2em;
+  }
+  
+  .Modéré::before {
+    content: '⚠️'; 
+    display: block;
+    font-size: 2em;
+  }
+  
+  .Élevé::before {
+    content: '❗'; 
+    display: block;
+    font-size: 2em;
+  }
+  .result {
+  /*  padding: 1em;
+    border-radius: 8px;
+    margin: 1em 0;
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+    font-family: Arial, sans-serif;*/
+
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-align: center;
+    background-color: #0d3497;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  .score strong{
+    color: #fff;
+  }
+  .score p {
+    color: #fff;
+  }
+  .status-message {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #e7f1ff; 
+    color: #31708f; 
+    border: 1px solid #bce8f1; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-size: 16px; 
+    font-family: 'Arial', sans-serif; 
+  }
+  
+  .status-message i {
+    font-size: 24px; 
+    margin-right: 10px; 
+    color: #31708f; 
+  }
+  
+  .status-message p {
+    margin: 0; 
+  }
+  
+  /*.deux {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  
+  .deux button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+  }
+  
+  .deux .score-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .deux .score-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  .deux .risk-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .deux .risk-btn:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+  }
+  
+  .deux .result {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .deux .result.low {
+    background-color: #8BC34A;
+    color: white;
+  }
+  
+  .deux .result.medium {
+    background-color: #FFC107;
+    color: white;
+  }
+  
+  .deux .result.high {
+    background-color: #FF5722;
+    color: white;
+  }
+  
+  .deux .result p {
+    margin: 0;
+  }
+  */

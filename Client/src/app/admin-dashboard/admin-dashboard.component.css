@@ -57,15 +57,11 @@
   }
   
   
-  /* credit recentes */
-  .charts-section {
-    display: flex;
-    gap: 20px;
-    margin-top: 40px;
-    
-  }
+
   
   .chart {
+    gap: 20px;
+    margin-top: 40px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex: 1;
@@ -92,13 +88,14 @@
     font-size: 13px;
     text-align: center;
     display: inline-block;
+    font-weight: bold;
 }
 
 .acceptée {
     background-color: #28a745;
 }
 
-.rejetée {
+.refusée {
     background-color: #dc3545;
 }
 

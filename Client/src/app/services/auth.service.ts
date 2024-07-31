@@ -4,12 +4,22 @@ import { Observable } from 'rxjs';
 import { User } from '../entities/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ChangePasswordRequest } from '../entities/ChangePasswordRequest';
+import { Compte } from '../entities/compte';
+import { UserDTO } from '../entities/DTO/UserDTO';
+
+interface DemandeCreditDTO {
+  montant: number;
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiURL: string = 'http://localhost:4444/auth/';
   private apiUser: string = 'http://localhost:4444/User/';
+  private apiLoan: string = 'http://localhost:4444/evaluation/';
+
 
 
   constructor(private http: HttpClient) {}
@@ -77,6 +87,17 @@ export class AuthService {
   }
   changePassword(request: ChangePasswordRequest): Observable<any> {
     return this.http.patch<any>(`${this.apiUser}changePassword`, request);
+  }
+
+  calculateScore(user: UserDTO): Observable<number> {
+    return this.http.post<number>(`${this.apiLoan}calculateScore`, {user});
+  }
+
+  evaluateRisk(compteBancaire: Compte, demandeCredit: DemandeCreditDTO): Observable<string> {
+    return this.http.post<string>(`${this.apiLoan}evaluate`, {
+      compteBancaire,
+      demandeCredit
+    }, { responseType: 'text' as 'json' }); 
   }
 
 }
