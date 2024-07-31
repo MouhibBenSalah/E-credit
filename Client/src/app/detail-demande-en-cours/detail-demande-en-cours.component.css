@@ -1,118 +1,202 @@
-.dialog-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 35px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-  }
-  
-  .dialog-backdrop {
+.dialog-backdrop {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000;
   }
-  .dialog-content h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
+  
+  .dialog-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1100px; 
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    z-index: 1001;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
 
-.dialog-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 10px 0;
-    padding: 8px 0;
-    border-bottom: 1px solid #f1f1f1;
-}
 
-.dialog-content p strong {
-    font-weight: 600;
-    color: #555;
-}
-
-.close-button {
+  .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: none;
+    background: #dc3545; 
+    color: #fff;
     border: none;
+    border-radius: 8px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 24px;
-    color: #dc3545;
+    transition: background-color 0.3s, transform 0.2s;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .close-button:hover {
-    color: #c82333;
+    background-color: #c82333;
+    transform: scale(1.1);
   }
 
-@media (max-width: 600px) {
-    .dialog-content {
-        padding: 15px;
-    }
-
-    .dialog-content h2 {
-        font-size: 20px;
-    }
-
-    .dialog-content p {
-        font-size: 14px;
-    }
-
-    .dialog-content .close-button {
-        width: 100%;
-    }
-}
-.action-buttons {
-    margin-top: 20px;
+  .client-info,
+  .demande-info,
+  .account-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .action-btn {
-    background-color: #007bff;
+.account-info{
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+
+
+  .dialog-content h2 {
+    font-size: 1.75em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 10px;
+    
+  }
+  
+  .dialog-content .section h3 {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .dialog-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dialog-content li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .dialog-content li:last-child {
+    border-bottom: none;
+  }
+  
+  .recommendation-button {
+    background: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-right: 10px;
+    border-radius: 8px;
+    padding: 12px 20px;
     cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .action-btn i {
-    margin-right: 5px;
-  }
-  
-  .action-btn:hover {
-    background-color: #0056b3;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
+    font-size: 1em;
     margin-top: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  th, td {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    text-align: left;
+  .recommendation-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
   }
   
-  th {
-    background-color: #f4f4f4;
+  .dialog-content p {
+    margin: 8px 0;
+    font-size: 1em;
+    color: #555;
+    font-family: 'Arial', sans-serif;
   }
   
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
+  .dialog-content strong {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .dialog-content {
+      flex-direction: column; /* Stack sections vertically on smaller screens */
+      gap: 15px; /* Reduce gap on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dialog-content {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .dialog-content h2 {
+      font-size: 1.5em;
+    }
+  
+    .dialog-content h3 {
+      font-size: 1.2em;
+    }
+  
+    .recommendation-button {
+      padding: 10px 15px;
+      font-size: 0.9em;
+    }
+  }
+  .done{
+    display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .score-btn {
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .score-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .score-btn i {
+    font-size: 1.2em;
+  }
+  
+  /* Risk Button Styles */
+  .risk-btn {
+    background: #28a745;
+    color: #fff;
+  }
+  
+  .risk-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  .risk-btn i {
+    font-size: 1.2em;
+  }
+  .deux{
+    display: flex;
+    gap: 20px;
   }

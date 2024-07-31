@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class DemandeCredit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,8 +45,12 @@ public class DemandeCredit {
     @JoinColumn(name = "dossier_credit_id")
     private DossierCredit dossierCredit;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Garantie> garanties;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+  /*  @JoinTable(name = "demande_credit_garanties",
+            joinColumns = { @JoinColumn(name = "demande_credits_id") },
+            inverseJoinColumns = { @JoinColumn(name = "garanties_id") })*/
+    private Set<Garantie> garanties ;
 
     private Long userId;
 
