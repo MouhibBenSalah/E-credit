@@ -2,6 +2,7 @@ package com.spring.DemandeCredit.Services;
 
 import com.spring.DemandeCredit.DTO.UserDTO;
 import com.spring.DemandeCredit.Entities.DemandeCredit;
+import com.spring.DemandeCredit.Enum.Statut;
 import com.spring.DemandeCredit.Enum.TypeUnite;
 import com.spring.DemandeCredit.Repositories.DemandeCreditRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -104,6 +106,17 @@ public class DemandeCreditService {
         }
         return nbreDemandes;
     }
+    public DemandeCredit updateStatus(Long id, Statut statut) {
+        Optional<DemandeCredit> demandeCreditOptional = demandeCreditRepository.findById(id);
+        if (demandeCreditOptional.isPresent()) {
+            DemandeCredit demandeCredit = demandeCreditOptional.get();
+            demandeCredit.setStatut(statut);
+            return demandeCreditRepository.save(demandeCredit);
+        } else {
+            throw new RuntimeException("DemandeCredit not found with id " + id);
+        }
+    }
+
 
 
 }

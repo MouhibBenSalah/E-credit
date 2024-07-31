@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DemandeCredit } from '../entities/DemandeCredit';
 import { Echeance } from '../entities/echeance';
+import { Statut } from '../Enum/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,13 @@ export class DemandeCreditService {
 
   getAllDemandesCredit(): Observable<DemandeCredit[]> {
     return this.http.get<DemandeCredit[]>(`${this.apiDemande}`);
+  }
+  updateStatus(id: number, statut: Statut): Observable<any> {
+    const payload = { statut: statut };  // Wrap the status in an object
+    return this.http.patch(`${this.apiDemande}/${id}/status`, payload, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }

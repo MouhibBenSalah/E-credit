@@ -73,8 +73,8 @@
                     <td>{{ demande.duree }}</td>
                     <td><button class="details-btn" (click)="openDialog(demande)"><i class="fa-solid fa-eye"></i></button></td>
                     <td class="action">
-                      <a><i class="fa-solid fa-check"></i></a>
-                      <a><i class="fa-solid fa-xmark"></i></a>
+                      <a (click)="accepterD(demande)"><i class="fa-solid fa-check"></i></a>
+                      <a (click)="refuserD(demande)"><i class="fa-solid fa-xmark"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -83,7 +83,7 @@
         </div>
   
         <!-- Charts Section -->
-        <div class="charts-section">
+        
           <div class="chart">
             <h2>Demandes Crédit Récentes</h2>
             <div class="table-container haha">  
@@ -117,11 +117,7 @@
               </table>
             </div>
           </div>
-          <div class="chart">
-            <h2>Traffic Sources</h2>
-            <canvas id="traffic-chart"></canvas>
-          </div>
-        </div>
+       
       </section>
     </div>
   </div>

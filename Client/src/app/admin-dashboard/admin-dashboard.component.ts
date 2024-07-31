@@ -75,6 +75,28 @@ export class AdminDashboardComponent {
       });
     });
   }
+  accepterD(demande: any) {
+    this.updateStatus(demande.id, Statut.ACCEPTÉE);
+  }
+
+  refuserD(demande: any) {
+    this.updateStatus(demande.id, Statut.REFUSÉE);
+  }
+
+  private updateStatus(id: number, status: Statut) {
+    this.demandeCreditService.updateStatus(id, status).subscribe(
+      response => {
+        console.log('Demande mise à jour avec succès', response);
+        this.demandesEnCours = this.demandesEnCours.filter(d => d.id !== id);
+        if (status === Statut.ACCEPTÉE || status === Statut.REFUSÉE) {
+          this.demandesAccRej.push(response);}
+      },
+      error => {
+        console.error('Erreur lors de la mise à jour de la demande', error);
+      }
+    );
+  }
+
   openDialog(demande: DemandeCredit): void {
     this.dialogRef.open(DetailDemandeEnCoursComponent, {
       data: demande,

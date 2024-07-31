@@ -84,3 +84,9 @@ export enum EtatCompte{
   POSITIF ='POSITIF',
   NEGATIF = 'NEGATIF'
 }
+export enum EmploymentType{
+  PUBLIC ='PUBLIC',
+  PRIVATE = 'PRIVATE',
+  SELF_EMPLOYED = 'SELF_EMPLOYED'
+
+}
