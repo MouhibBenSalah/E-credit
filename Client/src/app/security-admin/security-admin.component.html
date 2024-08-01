@@ -7,11 +7,11 @@
 </nav>
 <div class="change-password-container">
     <h2>Change Password</h2>
-    <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" #changePasswordForm="ngForm">
         <div class="form-group">
             <div class="input-group">
                 <label for="currentPassword">Current Password</label>
-                <input [type]="passwordFieldType" id="CurrentPassword" formControlName="currentPassword">
+                <input [type]="passwordFieldType" id="currentPassword" name="currentPassword" [(ngModel)]="changePasswordRequest.currentPassword" required>
                 <button class="toggle-password" type="button" (click)="togglePasswordVisibility()">
                     <i [ngClass]="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
                   </button> 
@@ -20,14 +20,14 @@
         <div class="form-group">
             <div class="input-group">
                 <label for="newPassword">New Password</label>
-                <input [type]="passwordFieldType" id="newPassword" formControlName="newPassword">
+                <input [type]="passwordFieldType" id="newPassword" name="newPassword" [(ngModel)]="changePasswordRequest.newPassword" required>
                 <button class="toggle-password" type="button" (click)="togglePasswordVisibility()">
                     <i [ngClass]="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
                   </button>           
              </div>
             <div class="input-group">
                 <label for="confirmPassword">Confirm New Password</label>
-                <input [type]="passwordFieldType" id="confirmPassword" formControlName="confirmPassword">
+                <input [type]="passwordFieldType" id="confirmationPassword" name="confirmationPassword" [(ngModel)]="changePasswordRequest.confirmationPassword" required>
                 <button class="toggle-password" type="button" (click)="togglePasswordVisibility()">
                     <i [ngClass]="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
                   </button> 
@@ -42,8 +42,8 @@
             </ul>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn-save" [disabled]="passwordForm.invalid">Save Changes</button>
-            <button type="reset" class="btn-reset" (click)="passwordForm.reset()">Reset</button>
+            <button type="submit" class="btn-save" >Save Changes</button>
+            <button type="reset" class="btn-reset" (click)="onReset(changePasswordForm)" >Reset</button>
         </div>
     </form>
 </div>

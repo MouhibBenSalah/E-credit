@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ChangePasswordRequest } from '../entities/ChangePasswordRequest';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-security-admin',
@@ -9,47 +10,50 @@ import { ChangePasswordRequest } from '../entities/ChangePasswordRequest';
   styleUrls: ['./security-admin.component.css']
 })
 export class SecurityAdminComponent {
-  passwordForm: FormGroup;
+  
   passwordFieldType: string = 'password';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.passwordForm = this.fb.group({
-      currentPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
-    }, { validator: this.passwordMatchValidator });
+  
+  changePasswordRequest: ChangePasswordRequest = {
+    currentPassword: '',
+    newPassword: '',
+    confirmationPassword: ''
+  };
+
+  constructor(private authService: AuthService, private router : Router) { }
+
+  onSubmit() {
+    if (this.changePasswordRequest.newPassword !== this.changePasswordRequest.confirmationPassword) {
+      alert('New password and confirmation password do not match');
+      return;
+    }
+
+    this.authService.changePassword(this.changePasswordRequest).subscribe(
+      () => {
+        alert('Password changed successfully');
+       this.router.navigate(['/adminDashboard']);
+      },
+      error => {
+        console.error('Error changing password', error);
+        alert('Failed to change password');
+      }
+    );
   }
-
-  passwordMatchValidator(frm: FormGroup) {
-    return frm.get('newPassword')?.value === frm.get('confirmPassword')?.value
-      ? null : { 'mismatch': true };
-  }
-
-
+  
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
-
-  onSubmit() {
-    
-      const request: ChangePasswordRequest = {
-        currentPassword: this.passwordForm.value.currentPassword,
-        newPassword: this.passwordForm.value.newPassword,
-        confirmPassword: this.passwordForm.value.confirmPassword
-      };
-
-      this.authService.changePassword(request).subscribe({
-        next: () => {
-          alert('Password changed successfully!');
-          this.passwordForm.reset();
-        },
-        error: (err) => {
-          console.error('Error changing password', err);
-          alert('Failed to change password. Please try again.');
-        }
-      });
-    
+  onReset(form: NgForm) {
+    form.resetForm();
+    this.changePasswordRequest = {
+      currentPassword: '',
+      newPassword: '',
+      confirmationPassword: ''
+    };
   }
+
+  
+ 
 }
 
 
