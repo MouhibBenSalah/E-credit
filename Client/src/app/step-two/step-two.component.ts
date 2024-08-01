@@ -32,7 +32,15 @@ export class StepTwoComponent {
     this.updateData.emit({ duree: +event.target.value }); }
 
   updateInteret(event: any) {
-    this.updateData.emit({ interet: +event.target.value }); 
+    const value = parseFloat(event.target.value);
+  
+  if (!isNaN(value) && value >= 0) {
+    this.demandeCredit.interet = value;
+  } else {
+    this.demandeCredit.interet = 0; // Reset or handle invalid input as needed
   }
+  this.updateData.emit({ interet: +event.target.value })
+} 
+  
   
 }

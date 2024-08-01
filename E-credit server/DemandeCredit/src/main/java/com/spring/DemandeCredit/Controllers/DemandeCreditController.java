@@ -54,6 +54,17 @@ public class DemandeCreditController {
         return ResponseEntity.ok(nbreDemandes);
     }
 
+    @GetMapping("/nbreDemandesAcc")
+    public ResponseEntity<Integer> getNbreDemandesAcc() {
+        Integer nbreDemandesAcc = demandeCreditService.calculateNbreDemandesAcceptes();
+        return ResponseEntity.ok(nbreDemandesAcc);
+    }
+    @GetMapping("/nbreDemandesRej")
+    public ResponseEntity<Integer> getNbreDemandesRej() {
+        Integer nbreDemandesRej = demandeCreditService.calculateNbreDemandesRefusee();
+        return ResponseEntity.ok(nbreDemandesRej);
+    }
+
     @PatchMapping("/{id}/status")
     public ResponseEntity<DemandeCredit> updateStatus(@PathVariable Long id, @RequestBody Map<String, String> status) {
         DemandeCredit updatedDemandeCredit = demandeCreditService.updateStatus(id, Statut.valueOf(status.get("statut")));

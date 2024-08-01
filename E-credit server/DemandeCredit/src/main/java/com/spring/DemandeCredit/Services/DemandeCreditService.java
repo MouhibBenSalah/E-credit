@@ -116,6 +116,30 @@ public class DemandeCreditService {
             throw new RuntimeException("DemandeCredit not found with id " + id);
         }
     }
+    public Integer calculateNbreDemandesAcceptes() {
+        List<DemandeCredit> demandesCredit = demandeCreditRepository.findAll();
+        int nbreDemandes = 0;
+        Statut acceptedStatus = Statut.ACCEPTÉE;
+
+        for (DemandeCredit demandeCredit : demandesCredit) {
+            if (demandeCredit.getStatut() == acceptedStatus) {
+                nbreDemandes++;
+            }
+        }
+        return nbreDemandes;
+    }
+    public Integer calculateNbreDemandesRefusee() {
+        List<DemandeCredit> demandesCredit = demandeCreditRepository.findAll();
+        int nbreDemandes = 0;
+        Statut rejectedStatus = Statut.REFUSÉE;
+
+        for (DemandeCredit demandeCredit : demandesCredit) {
+            if (demandeCredit.getStatut() == rejectedStatus) {
+                nbreDemandes++;
+            }
+        }
+        return nbreDemandes;
+    }
 
 
 

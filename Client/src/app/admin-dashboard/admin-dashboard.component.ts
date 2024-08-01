@@ -16,6 +16,8 @@ import { DetailDemandeEnCoursComponent } from '../detail-demande-en-cours/detail
 export class AdminDashboardComponent {
   nbreClients!: number;
   nbreDemandes!: number;
+  nbreDemandesAcc!: number;
+  nbreDemandesRej!: number;
   demandesEnCours: any[] = [];
   demandesAccRej: any[] = [];
 
@@ -34,6 +36,22 @@ export class AdminDashboardComponent {
     this.demandeCreditService.getnbreDemandes().subscribe(
       (data) => {
         this.nbreDemandes = data;
+      },
+      (error) => {
+        console.error('Error fetching demandes count', error);
+      }
+    );
+    this.demandeCreditService.getnbreDemandesAcc().subscribe(
+      (data) => {
+        this.nbreDemandesAcc = data;
+      },
+      (error) => {
+        console.error('Error fetching demandes count', error);
+      }
+    );
+    this.demandeCreditService.getnbreDemandesRej().subscribe(
+      (data) => {
+        this.nbreDemandesRej = data;
       },
       (error) => {
         console.error('Error fetching demandes count', error);
