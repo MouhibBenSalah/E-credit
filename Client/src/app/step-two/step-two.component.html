@@ -4,31 +4,31 @@
     <div class="row">
       <div class="col-md-6 form-group mb-5">
         <label for="typeCredit" class="col-form-label">Type Credit*</label>
-        <select id="typeCredit" name="typeCredit" (change)="updateTypeCredit($event)">
-          <option *ngFor="let typeC of typeCreditOptions" [value]="typeC" [selected]="demandeCredit?.typeCredit">{{ typeC }}</option>
+        <select id="typeCredit" name="typeCredit" (change)="updateTypeCredit($event)" [ngModel]="demandeCredit.typeCredit">
+          <option *ngFor="let typeC of typeCreditOptions" [value]="typeC">{{ typeC }}</option>
         </select>
       </div>
-    <div class="col-md-6 form-group mb-5">
+      
+      <div class="col-md-6 form-group mb-5">
         <label for="typeUnite" class="col-form-label">Unite Credit *</label>
-        <select id="typeUnite" name="typeUnite" (change)="updateTypeUnite($event)">
-          <option *ngFor="let typeU of typeUniteOptions" [value]="typeU" [selected]="demandeCredit?.unite">{{ typeU }}</option>
+        <select id="typeUnite" name="typeUnite" (change)="updateTypeUnite($event)" [ngModel]="demandeCredit.unite">
+          <option *ngFor="let typeU of typeUniteOptions" [value]="typeU">{{ typeU }}</option>
         </select>
       </div>
-    </div>
-
     <div class="row">
       <div class="col-md-4 form-group mb-5">
         <label for="montant" class="col-form-label">Montant a demander</label>
-        <input type="number" class="form-control" name="montant" id="montant" (input)="updateMontant($event)" [value]="demandeCredit?.montant">
+        <input type="number" class="form-control" name="montant" id="montant" (input)="updateMontant($event)" [value]="demandeCredit.montant">
       </div>
       <div class="col-md-4 form-group mb-5">
         <label for="duree" class="col-form-label">Duree En Mois</label>
-        <input type="number" class="form-control" name="duree" id="duree" (input)="updateDuree($event)" [value]="demandeCredit?.duree">
+        <input type="number" class="form-control" name="duree" id="duree" (input)="updateDuree($event)" [value]="demandeCredit.duree">
       </div>
       <div class="col-md-4 form-group mb-5">
         <label for="interet" class="col-form-label">Interet% (optionel)</label>
-        <input type="number" class="form-control" name="interet" id="interet" (input)="updateInteret($event)" [value]="demandeCredit?.interet">
+        <input type="number" class="form-control" name="interet" id="interet" (input)="updateInteret($event)" [value]="demandeCredit.interet">
       </div> 
-    </div>  
+    </div> 
+    </div> 
   </form>
 </div>

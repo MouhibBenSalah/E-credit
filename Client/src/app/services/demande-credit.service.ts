@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DemandeCredit } from '../entities/DemandeCredit';
@@ -11,6 +11,7 @@ import { Statut } from '../Enum/enums';
 export class DemandeCreditService {
   private apiDemande: string = 'http://localhost:4444/DemandesCredit';
   private apiEcheance: string = 'http://localhost:4444/echeances';
+  private apiPieceJointe : string ='http://localhost:4444/piece-jointes'
 
 
   constructor(private http : HttpClient) {  }
@@ -46,5 +47,17 @@ export class DemandeCreditService {
         'Content-Type': 'application/json'
       }
     });
+    
   }
+
+  uploadFile(file: File, obligatoire: boolean): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('obligatoire', obligatoire.toString());
+
+    return this.http.post(`${this.apiPieceJointe}/upload`, formData, {
+      responseType: 'text' // Adjust response type as needed
+    });
+  }
+  
 }

@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class DemandeCredit {
     @Enumerated(EnumType.STRING)
     private Statut statut;
 
-    @OneToMany(mappedBy = "demandeCredit", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<PieceJointe> pieceJointes;
 
     @ManyToOne

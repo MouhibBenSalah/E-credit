@@ -5,6 +5,8 @@ import { DemandeCreditService } from '../services/demande-credit.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../entities/user';
 import { Garantie } from '../entities/DTO/GarantieDTO';
+import { Router } from '@angular/router';
+import { PieceJointe } from '../entities/DTO/PieceJointeDTO';
 
 @Component({
   selector: 'app-formulaire-demande-credit',
@@ -32,14 +34,12 @@ export class FormulaireDemandeCreditComponent {
     userId: 0 
   };
 
-  constructor(private demandeCreditService: DemandeCreditService , private authService :AuthService){}
+  constructor(private demandeCreditService: DemandeCreditService , private authService :AuthService, private router :Router){}
 
 
   ngOnInit(): void {
-  
-      this.currentUser = this.authService.currentUser();    
-      this.demandeCredit.userId = this.currentUser.id;
-    
+    this.currentUser = this.authService.currentUser();
+    this.demandeCredit.userId = this.currentUser.id;
   }
 
   nextStep() {
@@ -51,16 +51,23 @@ export class FormulaireDemandeCreditComponent {
   }
 
   submitForm() {
-    console.log('Form submitted!', this.demandeCredit);
     this.demandeCreditService.createDemandeCredit(this.demandeCredit).subscribe(response => {
-      console.log('Form submission response:', response);
+      this.demandeCredit.id = response.id; // Assume response contains the new ID
+      console.log('Form submitted!', this.demandeCredit);
+      this.router.navigate(['/']);
     });
   }
-    updateDemandeCredit(data: Partial<DemandeCredit>) {
+
+  updateDemandeCredit(data: Partial<DemandeCredit>) {
     this.demandeCredit = { ...this.demandeCredit, ...data };
   }
 
   updateGaranties(garanties: Garantie[]) {
     this.demandeCredit.garanties = garanties;
+  }
+
+  updatePieceJointes(pieceJointes: PieceJointe[]) {
+    this.demandeCredit.pieceJointes = pieceJointes;
+    console.log(this.demandeCredit.pieceJointes);
   }
 }

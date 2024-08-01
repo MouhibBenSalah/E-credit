@@ -76,8 +76,8 @@ a, a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("../../assets/images/loan.jpg") center/cover no-repeat;
-    filter: blur(3px); /* Adjust opacity of the background image */
+    background: url("../../assets/images/loan1.jpg") center/cover no-repeat;
+    filter: blur(1px); /* Adjust opacity of the background image */
     z-index: -1;
   }
   
