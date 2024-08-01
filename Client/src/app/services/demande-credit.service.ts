@@ -27,6 +27,12 @@ export class DemandeCreditService {
   getnbreDemandes() : Observable<number> {
     return this.http.get<number> (`${this.apiDemande}/nbreDemandes`)
   }
+  getnbreDemandesAcc() : Observable<number> {
+    return this.http.get<number> (`${this.apiDemande}/nbreDemandesAcc`)
+  }
+  getnbreDemandesRej() : Observable<number> {
+    return this.http.get<number> (`${this.apiDemande}/nbreDemandesRej`)
+  }
   generateEcheances(montant: number, duree: number, typeCredit: string): Observable<Echeance[]> {
     // Prepare URL parameters
     const params = new HttpParams()
@@ -59,5 +65,5 @@ export class DemandeCreditService {
       responseType: 'text' // Adjust response type as needed
     });
   }
-  
+
 }

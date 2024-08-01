@@ -15,20 +15,58 @@
           <option *ngFor="let typeU of typeUniteOptions" [value]="typeU">{{ typeU }}</option>
         </select>
       </div>
-    <div class="row">
-      <div class="col-md-4 form-group mb-5">
-        <label for="montant" class="col-form-label">Montant a demander</label>
-        <input type="number" class="form-control" name="montant" id="montant" (input)="updateMontant($event)" [value]="demandeCredit.montant">
+      <div class="row">
+        <div class="col-md-4 form-group mb-5">
+          <label for="montant" class="col-form-label">Montant a demander</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            name="montant" 
+            id="montant" 
+            (input)="updateMontant($event)" 
+            [(ngModel)]="demandeCredit.montant"
+            required 
+            min="1000"
+            #montant="ngModel">
+          <div *ngIf="montant.invalid && montant.touched" class="error">
+            Montant a demander is required and must be a positive number.
+          </div>
+        </div>
+        
+        <div class="col-md-4 form-group mb-5">
+          <label for="duree" class="col-form-label">Duree En Mois</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            name="duree" 
+            id="duree" 
+            (input)="updateDuree($event)" 
+            [(ngModel)]="demandeCredit.duree"
+            required 
+            min="1"
+            #duree="ngModel">
+          <div *ngIf="duree.invalid && duree.touched" class="error">
+            Duree En Mois is required and must be at least 1 month.
+          </div>
+        </div>
+        
+        <div class="col-md-4 form-group mb-5">
+          <label for="interet" class="col-form-label">Interet</label>
+          <input 
+    type="text" 
+    class="form-control" 
+    name="interet" 
+    id="interet" 
+    (input)="updateInteret($event)" 
+    [(ngModel)]="demandeCredit.interet"
+    step="any"
+    #interet="ngModel">
+
+          <div *ngIf="interet.invalid && interet.touched" class="error">
+            Interet must be a positive number.
+          </div>
+        </div>
       </div>
-      <div class="col-md-4 form-group mb-5">
-        <label for="duree" class="col-form-label">Duree En Mois</label>
-        <input type="number" class="form-control" name="duree" id="duree" (input)="updateDuree($event)" [value]="demandeCredit.duree">
-      </div>
-      <div class="col-md-4 form-group mb-5">
-        <label for="interet" class="col-form-label">Interet% (optionel)</label>
-        <input type="number" class="form-control" name="interet" id="interet" (input)="updateInteret($event)" [value]="demandeCredit.interet">
-      </div> 
-    </div> 
     </div> 
   </form>
 </div>

@@ -32,7 +32,32 @@ h3{
    .form-control {
     height: 45px;
   }
+  .error {
+    color: #e74c3c;
+    background-color: #fce4e4;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid #e74c3c;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+  }
   
+  .error::before {
+    content: '\f06a'; /* FontAwesome exclamation circle icon */
+    font-family: 'FontAwesome';
+    margin-right: 5px;
+  }
+  
+  .error-icon {
+    margin-right: 10px;
+    color: #e74c3c;
+  }
+  
+  .error-message {
+    margin: 0;
+  }
   
   .form-group select {
       margin-top: 8px;

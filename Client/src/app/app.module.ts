@@ -35,6 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { EcheancesDetailsComponent } from './echeances-details/echeances-details.component';
 import { DetailDemandeEnCoursComponent } from './detail-demande-en-cours/detail-demande-en-cours.component';
+import { AproposComponent } from './apropos/apropos.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { DetailDemandeEnCoursComponent } from './detail-demande-en-cours/detail-
     SecurityAdminComponent,
     DemandeDetailsComponent,
     EcheancesDetailsComponent,
-    DetailDemandeEnCoursComponent
+    DetailDemandeEnCoursComponent,
+    AproposComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
