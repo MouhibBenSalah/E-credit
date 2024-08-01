@@ -1,22 +1,30 @@
 package com.spring.DemandeCredit.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Set;
 
 @Entity
 @Data
 public class PieceJointe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private boolean obligatoire;
-    private boolean statut;
+    private String nomFichier;
+    private String typeMime;
     private Long taille;
-    @Lob
+
     private byte[] data;
 
-    @ManyToOne
-    @JoinColumn(name = "demande_credit_id")
-    private DemandeCredit demandeCredit;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "pieceJointes")
+
+    @JsonIgnore
+    private Set<DemandeCredit> demandeCredits ;
 
 }

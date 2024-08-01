@@ -8,7 +8,7 @@
               <app-step-one *ngSwitchCase="1" (nextStep)="nextStep()"></app-step-one>
               <app-step-two *ngSwitchCase="2" [demandeCredit]="demandeCredit" (previousStep)="previousStep()" (nextStep)="nextStep()" (updateData)="updateDemandeCredit($event)"></app-step-two>
               <app-step-three *ngSwitchCase="3" [garanties]="demandeCredit.garanties" (updateGaranties)="updateGaranties($event)"  (previousStep)="previousStep()" (submitForm)="nextStep()"></app-step-three>
-              <app-step-four *ngSwitchCase="4" (previousStep)="previousStep()" (submitForm)="submitForm()"></app-step-four>
+              <app-step-four *ngSwitchCase="4"  (previousStep)="previousStep()" (submitForm)="submitForm()"></app-step-four>
               
             </div>
             <div class="d-flex justify-content-between mt-3">
