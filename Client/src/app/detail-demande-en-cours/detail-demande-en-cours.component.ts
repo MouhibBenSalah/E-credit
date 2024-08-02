@@ -72,15 +72,25 @@ export class DetailDemandeEnCoursComponent {
 
     updateStatusMessage(): void {
       if (this.riskScore !== null && this.riskLevel) {
-        if (this.riskScore > 70 && this.riskLevel === 'faible') {
-          this.statusMessage = 'Le client est légitime pour obtenir un crédit.';
-        } else if (this.riskScore > 640 && this.riskLevel === 'modéré') {
-          this.statusMessage = 'Le client est légitime pour obtenir un crédit avec des conditions.';
+        let creditScore = this.riskScore;
+        let riskLevel = this.riskLevel;
+    
+        // Définir des seuils pour approuver, refuser ou approuver avec conditions
+        let highCreditScoreThreshold = 7.5;
+        let moderateCreditScoreThreshold = 5.0;
+    
+        // Logique d'approbation du crédit
+        if (creditScore >= highCreditScoreThreshold && riskLevel === "Faible") {
+          this.statusMessage = "Le client est légitime pour obtenir un crédit.";
+        } else if (creditScore < moderateCreditScoreThreshold || riskLevel === "Élevé") {
+          this.statusMessage = "Le client n\'est pas légitime pour obtenir un crédit.";
+        } else if (creditScore >= moderateCreditScoreThreshold && creditScore < highCreditScoreThreshold && riskLevel === "Modéré") {
+          this.statusMessage = "Le client est légitime pour obtenir un crédit avec des conditions.";
         } else {
-          this.statusMessage = 'Le client n\'est pas légitime pour obtenir un crédit.';
-        }
+          this.statusMessage = "Le client est légitime pour obtenir un crédit avec des conditions.";
       }
     }
+  }
   
   closeDialog(): void {
     this.dialogRef.close();

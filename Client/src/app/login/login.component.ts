@@ -27,7 +27,7 @@ export class LoginComponent {
     constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) {
       this.loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['']
+        password: ['', [Validators.required, Validators.minLength(8)]]
       });
   
       this.signupForm = this.fb.group({
@@ -35,11 +35,12 @@ export class LoginComponent {
         prenom: ['', Validators.required],
         numCin: ['', [Validators.required, this.cinValidator]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(8)]],
         dateNaiss: ['', [Validators.required, this.ageValidator(18)]],
         role: ['Client']
       });
     }
+
 
     private cinValidator(control: AbstractControl): { [key: string]: any } | null {
       const valid = /^\d{8}$/.test(control.value);

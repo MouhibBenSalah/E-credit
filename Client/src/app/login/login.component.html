@@ -34,7 +34,8 @@
 
         <input required formControlName="password" type="password" placeholder="Password">
         <div *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched" class="error-msg">
-          Password is required.
+          <div *ngIf="signupForm.get('password')!.errors?.['required']">Password is required.</div>
+          <div *ngIf="signupForm.get('password')!.errors?.['minlength']">Password must be at least 8 characters long.</div>
         </div>
 
         <div *ngIf="signupError" class="error-msg">{{ signupError }}</div>
@@ -51,9 +52,11 @@
         </div>
 
         <input required formControlName="password" type="password" placeholder="Password">
-        <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="error-msg">
-          Password is required.
-        </div>
+    <div *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched" class="error-msg">
+      <div *ngIf="signupForm.get('password')!.errors?.['required']">Password is required.</div>
+      <div *ngIf="signupForm.get('password')!.errors?.['minlength']">Password must be at least 8 characters long.</div>
+    </div>
+
 
         <div *ngIf="loginError" class="error-msg">{{ loginError }}</div>
         <a routerLink="/ForgetPass">Mot de Passe Oublié?</a>
@@ -69,8 +72,8 @@
           <button class="hidden" (click)="toggleForm()">Créer un Compte</button>
         </div>
         <div class="toggle-panel toggle-right">
-          <h1>Welcome!</h1>
-          <p>Already have an account!</p>
+          <h1>Bienvenue!</h1>
+          <p>Vous avez Deja un Compte!</p>
           <button class="hidden" (click)="toggleForm()">Se Connecter</button>
         </div>
       </div>
