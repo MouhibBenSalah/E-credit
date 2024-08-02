@@ -56,7 +56,6 @@ a, a:hover {
     padding: 40px;
     position: relative;
     color: rgba(39, 38, 38, 0.333);
-    background: rgba(135, 135, 135, 0.5); /* Lower opacity background */
     background-blend-mode: overlay;
   }
   
@@ -76,8 +75,8 @@ a, a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("../../assets/images/loan1.jpg") center/cover no-repeat;
-    filter: blur(1px); /* Adjust opacity of the background image */
+    background: url("../../assets/images/femme.png") center/cover no-repeat;
+    filter: blur(1px);
     z-index: -1;
   }
   

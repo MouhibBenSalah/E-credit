@@ -9,12 +9,11 @@
    
 }
 
-.container img{
+.navbar-brand img{
     width: 150px;
     height: 70px;
     position: relative;
-    right: 50px;
-    
+    right: 40px;
 }
 
 .container {
@@ -32,7 +31,6 @@
     display: flex;
     align-items: center;
     margin: 0;  
-    margin-left: 60px;  
     
 }
 .credit a {
@@ -47,7 +45,7 @@
 
 
 .nav-links li {
-    margin: 0 10px;
+    margin: 0 9px;
     text-wrap: nowrap;
     
 }
@@ -153,14 +151,12 @@
     background-color: rgb(231, 229, 229);
   }
 
-.profile {
+
+  .profile img{
     position:relative;
     width: 55px;
     height: 55px;
     border-radius: 50%;
     overflow: hidden;
-  
-  }
-  .profile img{
     object-fit: cover;
   }

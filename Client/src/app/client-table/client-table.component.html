@@ -8,7 +8,7 @@
         <th>Sexe</th>
         <th>Age</th>
         <th>Salaire</th>
-        <th>Status</th>
+        
         <th>Comptes <br> Bancaires</th>
         <th>Action</th>
       </tr>
@@ -27,9 +27,7 @@
         <td>{{ author.sexe }}</td>
         <td>{{ author.age }}</td>
         <td>{{ author.salaire }}</td>
-        <td>
-          <span class="status" [ngClass]="{'online': author.typeRisque === 'RISQUE', 'NON_RISQUE': author.typeRisque === 'NON_RISQUE'}">{{ author.typeRisque }}</span>
-        </td>
+      
         <td>{{ author.comptes.length || 0 }} comptes</td> 
         <td><button class="edit-button" (click)="deleteUser(author.id)"><i class="fa-solid fa-trash"></i></button></td>
       </tr>
