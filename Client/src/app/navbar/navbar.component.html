@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand d-flex px-4 px-lg-5" >
+            <img src="../../assets/images/logo.png" alt="GTI LOGO"> </a>
+        <button class="navbar-toggler" (click)="toggleMenu()" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links" [ngClass]="{'show': menuOpen}">
+            <li class="credit"><a href="#simulateur-credit">Simuler un Credit</a></li>
+            <li><a href="#A-propos">A propos</a></li>
+            <li><a href="#footer">Contact</a></li>
+            <li *ngIf="!auth.isLoggedIn()">
+                <a routerLink="/login" class="btn btn-primary py-2 px-lg-4 d-none d-lg-block">
+                  Se Connecter<i class="fa fa-arrow-right ms-3"></i>
+                </a>
+              </li>
+              <li *ngIf="auth.isLoggedIn() && auth.currentUser()?.role === 'Client' ">
+                <div class="nav-item dropdown">
+                  <div class="picon profile">
+                    <img [src]="currentUser.profilePicture ? 'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture : '../../assets/images/fcbk.png'" alt="user-img">
+                  </div>
+                  <div class="dropdown-menu fade-down m-0">
+                    <a routerLink="/profile" class="dropdown-item" routerLinkActive="active">Mon Profil</a>
+                    <a routerLink="/formulaireDemandeCredit" class="dropdown-item" routerLinkActive="active">Demander Un Credit</a>
+                    <a routerLink="/demandeCredit" class="dropdown-item" routerLinkActive="active">Mes Demandes Credit</a>
+                    <a class="dropdown-item" (click)="logout()">Deconnecter</a>
+                  </div>
+                </div>
+              </li>
+        </ul>
+        
+    </div>
+</nav>
