@@ -48,22 +48,17 @@ public class AuthenticationService {
                         .numCompte(compteRequest.getNumCompte())
                         .dateOuvCompte(compteRequest.getDateOuvCompte())
                         .deviseC(compteRequest.getDeviseC())
-                        .user(user) // Set the User reference
+                        .typeC(compteRequest.getTypeC())
+                        .etatC(compteRequest.getEtatC())
+                        .user(user)
                         .build())
                 .collect(Collectors.toSet());
-        // Set the list of comptes to the user
+
         user.setComptes(comptes);*/
 
-        // Save user to repository
         userRepository.save(user);
-
-        // Generate JWT token
-        var jwtToken = jwtService.generateToken(user, user.getUsername());
-
-        // Return AuthenticationResponse with token
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder().token(jwtToken).build();
     }
 
     public AuthenticationResponse login(LoginRequest request) {
@@ -75,14 +70,18 @@ public class AuthenticationService {
         );
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
-
-        Map<String, Object> claims = new HashMap<>();
-        String jwtToken = jwtService.generateToken(user, user.getUsername());
-
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder().token(jwtToken).build();
     }
+    
+    /**
+     * Setup password for first-time login (newly created accounts by admin)
+     */
+    public void setupFirstTimePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
     public void createPasswordResetTokenForUser(User user, String token) {
         PasswordResetToken myToken = new PasswordResetToken(token, user);
         tokenRepository.save(myToken);
