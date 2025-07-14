@@ -20,11 +20,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -38,6 +41,8 @@ public class UserService {
     private NotificationClient notificationClient;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JavaMailSender mailSender;
 
 
     public List<User> getAllUsers(){
@@ -47,8 +52,117 @@ public class UserService {
     public List<User> getAllClients() {
         return  userRepository.findByRole(Role.Client);
     }
+    
+    public List<User> getAllChefAgence() {
+        return userRepository.findByRole(Role.CHEF_AGENCE);
+    }
+    
+    public List<User> getAllChargeBanque() {
+        return userRepository.findByRole(Role.CHARGE_BANQUE);
+    }
+    
     public User createUser(User user){
         return userRepository.save(user);
+    }
+    
+    /**
+     * Create user account by admin with email notification
+     * Only admin can create accounts for CHEF_AGENCE and CHARGE_BANQUE
+     */
+    public User createUserByAdmin(User user, Role targetRole) {
+        // Generate temporary password
+        String tempPassword = generateTemporaryPassword();
+        
+        // Set user properties
+        user.setRole(targetRole);
+        user.setPassword(passwordEncoder.encode(tempPassword));
+        
+        // Save user
+        User savedUser = userRepository.save(user);
+        
+        // Send email notification with password reset instructions
+        sendAccountCreationEmail(savedUser.getEmail(), savedUser.getNom(), savedUser.getPrenom(), targetRole);
+        
+        return savedUser;
+    }
+    
+    /**
+     * Generate a temporary password for new accounts
+     */
+    private String generateTemporaryPassword() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
+    
+    /**
+     * Send email notification when admin creates an account
+     */
+    private void sendAccountCreationEmail(String email, String nom, String prenom, Role role) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(email);
+        mailMessage.setSubject("Compte créé - E-Credit System");
+        
+        String roleDisplay = getRoleDisplayName(role);
+        String resetUrl = "http://localhost:4200/reset-password-first-time/" + email;
+        
+        String message = String.format(
+            "Bonjour %s %s,\n\n" +
+            "Votre compte %s a été créé avec succès dans le système E-Credit.\n\n" +
+            "Pour définir votre mot de passe, veuillez cliquer sur le lien suivant :\n%s\n\n" +
+            "Ce lien vous permettra de configurer votre mot de passe personnalisé.\n\n" +
+            "Cordialement,\n" +
+            "L'équipe E-Credit",
+            prenom, nom, roleDisplay, resetUrl
+        );
+        
+        mailMessage.setText(message);
+        mailSender.send(mailMessage);
+    }
+    
+    /**
+     * Get display name for role
+     */
+    private String getRoleDisplayName(Role role) {
+        switch (role) {
+            case CHEF_AGENCE:
+                return "Chef d'Agence";
+            case CHARGE_BANQUE:
+                return "Chargé de Banque";
+            case Admin:
+                return "Administrateur";
+            case Client:
+                return "Client";
+            default:
+                return role.toString();
+        }
+    }
+    
+    /**
+     * Check if user has admin role
+     */
+    public boolean isAdmin(User user) {
+        return user.getRole() == Role.Admin;
+    }
+    
+    /**
+     * Get default admin account
+     */
+    public User getDefaultAdmin() {
+        Optional<User> adminUser = userRepository.findByRole(Role.Admin).stream().findFirst();
+        
+        if (adminUser.isEmpty()) {
+            // Create default admin if doesn't exist
+            User defaultAdmin = User.builder()
+                .nom("Admin")
+                .prenom("System")
+                .email("admin@ecredit.com")
+                .password(passwordEncoder.encode("admin123"))
+                .role(Role.Admin)
+                .numCin(1000000000L)
+                .build();
+            return userRepository.save(defaultAdmin);
+        }
+        
+        return adminUser.get();
     }
 
     public Compte creerComptePourClient(Long userId, Compte compte) {

@@ -22,6 +22,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
         return ResponseEntity.ok(authenticationService.login(request));
     }
+    
     @PostMapping("/forgot-password")
     public ResponseEntity<Object> forgotPassword(@RequestParam("email") String email) {
         Optional<User> optionalUser = authenticationService.findUserByEmail(email);
@@ -38,6 +39,37 @@ public class AuthenticationController {
 
         return ResponseEntity.ok().build();
     }
+    
+    /**
+     * First-time password setup for newly created accounts
+     * This is used when admin creates an account and user needs to set their password
+     */
+    @PostMapping("/setup-password-first-time")
+    public ResponseEntity<Map<String, String>> setupPasswordFirstTime(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        String newPassword = payload.get("password");
+        
+        try {
+            Optional<User> optionalUser = authenticationService.findUserByEmail(email);
+            if (!optionalUser.isPresent()) {
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("error", "Utilisateur non trouvé");
+                return ResponseEntity.badRequest().body(errorResponse);
+            }
+            
+            User user = optionalUser.get();
+            authenticationService.setupFirstTimePassword(user, newPassword);
+            
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Mot de passe configuré avec succès");
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Erreur lors de la configuration du mot de passe: " + e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
 
     @PostMapping("/reset-password")
     public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> payload) {
@@ -49,7 +81,29 @@ public class AuthenticationController {
             response.put("message", "Password reset successfully");
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
         }
+    }
+    
+    /**
+     * Validate user exists by email - used for first-time password setup
+     */
+    @GetMapping("/validate-email/{email}")
+    public ResponseEntity<Map<String, Object>> validateEmail(@PathVariable String email) {
+        Optional<User> optionalUser = authenticationService.findUserByEmail(email);
+        Map<String, Object> response = new HashMap<>();
+        
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            response.put("exists", true);
+            response.put("name", user.getPrenom() + " " + user.getNom());
+            response.put("role", user.getRole().toString());
+        } else {
+            response.put("exists", false);
+        }
+        
+        return ResponseEntity.ok(response);
     }
 }
