@@ -20,7 +20,7 @@
                     <img [src]="currentUser.profilePicture ? 'http://localhost:4444/User/profile-picture/' + currentUser.profilePicture : '../../assets/images/fcbk.png'" alt="Profile Picture" class="profile-thumb">
                     <div>
                         <p>{{ currentUser.nom }} {{ currentUser.prenom }}</p>
-                        <p class="role">Admin</p>
+                        <p class="role">{{ currentUser.role }}</p>
                     </div>
                 </div>
                 <a routerLink="/profilAdmin"><i class="fa-solid fa-user"></i>Profile</a>

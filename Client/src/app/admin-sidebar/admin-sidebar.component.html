@@ -5,12 +5,21 @@
     </div>
     <nav class="sidebar-nav">
       <ul>
-        <li><a routerLink="/adminDashboard"><i class="fa fa-home"></i> Dashboard</a></li>
-        <li><a routerLink="/clients"><i class="fa fa-users"></i> Clients</a></li>
-        <li><a routerLink="/profilAdmin"><i class="fa fa-cogs"></i> Mon Profil</a></li>
-        <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+        <!-- Admin navigation - User Management -->
+        <ng-container *ngIf="currentUserRole === 'Admin'">
+          <li><a routerLink="/clients"><i class="fa fa-users"></i> Gestion Utilisateurs</a></li>
+          <li><a routerLink="/profilAdmin"><i class="fa fa-user"></i> Mon Profil</a></li>
+          <li><a routerLink="/securityAdmin"><i class="fa fa-lock"></i> Sécurité</a></li>
+        </ng-container>
+        
+        <!-- CHEF_AGENCE navigation - Credit Management -->
+        <ng-container *ngIf="currentUserRole === 'CHEF_AGENCE'">
+          <li><a routerLink="/adminDashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+          <li><a routerLink="/profilAdmin"><i class="fa fa-user"></i> Mon Profil</a></li>
+          <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
+        </ng-container>
+        
         <li><a (click)="logout()"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
       </ul>
     </nav>
-
   </aside>

@@ -1,6 +1,8 @@
 export enum Role {
     Client = 'Client',
-    Admin = 'Admin'
+    Admin = 'Admin',
+    CHEF_AGENCE = 'CHEF_AGENCE',
+    CHARGE_BANQUE = 'CHARGE_BANQUE'
   }
   
   export enum LieuNaissance {
