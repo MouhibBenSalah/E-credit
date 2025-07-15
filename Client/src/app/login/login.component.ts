@@ -3,25 +3,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../entities/user';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  public isLoginFormActive: boolean = true;
-  
- 
-
-  toggleForm() {
-    this.isLoginFormActive = !this.isLoginFormActive;}
-    
   loginForm: FormGroup;
   loginError: string = '';
-
-  signupForm: FormGroup;
-  signupError: string = ''; 
-
   currentUser! :User;
 
     constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) {
@@ -29,66 +19,7 @@ export class LoginComponent {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]]
       });
-  
-      this.signupForm = this.fb.group({
-        nom: ['', Validators.required],
-        prenom: ['', Validators.required],
-        numCin: ['', [Validators.required, this.cinValidator]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
-        dateNaiss: ['', [Validators.required, this.ageValidator(18)]],
-        role: ['Client']
-      });
     }
-
-
-    private cinValidator(control: AbstractControl): { [key: string]: any } | null {
-      const valid = /^\d{8}$/.test(control.value);
-      return valid ? null : { invalidCin: true };
-    }
-  
-    // Custom validator for age
-    private ageValidator(minAge: number) {
-      return (control: AbstractControl): { [key: string]: any } | null => {
-        const birthDate = new Date(control.value);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-          age--;
-        }
-        return age >= minAge ? null : { underAge: true };
-      };
-    }
-  
-  signupSubmit() {
-    const nomControl = this.signupForm.get('nom');
-    const prenomControl = this.signupForm.get('prenom');
-    const numCinControl = this.signupForm.get('numCin');
-    const emailControl = this.signupForm.get('email');
-    const passwordControl = this.signupForm.get('password');
-    const dateNaissControl = this.signupForm.get('dateNaiss');
-
-    if (emailControl && passwordControl && emailControl.valid && passwordControl.valid && nomControl && prenomControl && nomControl.valid && prenomControl.valid && numCinControl && numCinControl.valid && dateNaissControl && dateNaissControl.valid ) {
-      this.signupError = '';
-
-      this.auth.signup(this.signupForm.value).subscribe({
-        next: (result) => {
-          // this.router.navigate(['/login']);
-          this.isLoginFormActive = true;
-        },
-        error: (err) => {
-          this.signupError = "Erreur d'authentification";
-          console.log(this.signupError);
-        },
-      });
-      
-    } else {
-      this.signupError = 'Please enter valid credentials';
-      console.log(this.signupError);
-    }
-    console.log(this.signupForm.value);
-  }
 
   loginSubmit() {
     const emailControl = this.loginForm.get('email');
@@ -110,9 +41,13 @@ export class LoginComponent {
         const currentUser = this.auth.currentUser();
 
         if (currentUser && currentUser.role === 'Admin') {
-          this.router.navigate(['/adminDashboard']);
+          this.router.navigate(['/clients']);  // Admin manages users
+        } else if (currentUser && currentUser.role === 'CHEF_AGENCE') {
+          this.router.navigate(['/adminDashboard']);  // Chef d'agence manages credit requests
+        } else if (currentUser && currentUser.role === 'CHARGE_BANQUE') {
+          this.router.navigate(['/']);  // Bank officer default page
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/']);  // Default redirect
         }
         
         },
@@ -124,8 +59,6 @@ export class LoginComponent {
       this.loginError = 'Please enter valid credentials';
     }
   }
-
-
-  }
+}
 
 

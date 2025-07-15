@@ -8,16 +8,17 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./admin-sidebar.component.css']
 })
 export class AdminSidebarComponent {
+  currentUserRole: string = '';
 
   constructor(public auth: AuthService, private router: Router) {}
 
+  ngOnInit(): void {
+    const user = this.auth.currentUser();
+    this.currentUserRole = user?.role || '';
+  }
 
-
-    logout(): void {
-      this.auth.logout();
-      this.router.navigate(['/login']);
-    }
-  
-  
-
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }

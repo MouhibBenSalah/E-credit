@@ -9,6 +9,7 @@ import { DemandeCreditComponent } from './demande-credit/demande-credit.componen
 import { authGuard, LoggedGuard } from './services/auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './services/admin.guard';
+import { chefAgenceGuard } from './services/chef-agence.guard';
 import { FormulaireDemandeCreditComponent } from './formulaire-demande-credit/formulaire-demande-credit.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 import { ClientTableComponent } from './client-table/client-table.component';
@@ -24,7 +25,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate:[LoggedGuard],
-    title: 'Inscrivez Vous',
+    title: 'Connexion',
   },
   {
     path: 'ForgetPass',
@@ -51,8 +52,8 @@ const routes: Routes = [
   {
     path:'adminDashboard',
     component:AdminDashboardComponent,
-    canActivate: [  adminGuard],
-    title: 'Admin Dashboard'
+    canActivate: [chefAgenceGuard],
+    title: 'Chef d\'Agence Dashboard'
   },
   {
     path:'formulaireDemandeCredit',
@@ -70,7 +71,7 @@ const routes: Routes = [
     path:'clients',
     component:ClientTableComponent,
     canActivate:[adminGuard],
-    title:'Les Clients'
+    title:'Gestion des Utilisateurs'
   },
   {
     path:'securityAdmin',
